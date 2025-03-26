@@ -1,0 +1,59 @@
+<section class="py-6 bg-gray-100">
+  <div class="w-full max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
+    <div class="text-center mb-4">
+      <h2 class="text-xl font-bold text-gray-800">PV de déchets</h2>
+    </div>
+
+    <form [formGroup]="pvDechetForm" (ngSubmit)="submitAddPvDechet()">
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-1">Date</label>
+          <input type="date" formControlName="Date_Creation" class="w-full px-3 py-2 border rounded">
+        </div>
+        
+        <div>
+          <select formControlName="Nature_Dechet"  name="Nature_Dechet" id="Nature_Dechet" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <option value="">Sélectionnez une catégorie</option>
+            <option *ngFor="let c of categorie" [value]="c._id">{{c.type_Categorie}}</option>
+        </select>
+        </div>
+      </div>
+      <div>
+        <label class="block text-gray-700 text-sm font-bold mb-1">Type</label>
+        <input type="text" formControlName="Type_Dechet" name="Type_Dechet" id="Type_Dechet" class="w-full px-3 py-2 border rounded">
+      </div>
+      <div class="grid grid-cols-1 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-1">Désignation</label>
+          <input type="text" formControlName="Designation" class="w-full px-3 py-2 border rounded">
+        </div>
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-1">Quantité</label>
+          <input type="number" formControlName="Quantite" class="w-full px-3 py-2 border rounded">
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-1">N° de lot</label>
+          <input type="number" formControlName="Num_lot" class="w-full px-3 py-2 border rounded">
+        </div>
+        
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-1">Motif de rejet</label>
+          <input type="text" formControlName="Motif_Rejet" class="w-full px-3 py-2 border rounded">
+        </div>
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-1">Commentaire</label>
+          <textarea formControlName="Commentaire" class="w-full px-3 py-2 border rounded" rows="3"></textarea>
+        </div>
+      </div>
+
+      <div class="flex justify-between mt-4">
+        <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded">Enregistré</button>
+        <button type="button" class="bg-yellow-500 text-white px-4 py-2 rounded">Modifié</button>
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Validé</button>
+      </div>
+    </form>
+
+    <p class="text-red-500 text-sm text-right mt-4">PV créé par le service émetteur</p>
+  </div>
+</section>
