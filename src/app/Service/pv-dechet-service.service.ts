@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, retry } from 'rxjs';
 import { pvDechet } from '../model/pvDechet';
 
 @Injectable({
@@ -14,4 +14,15 @@ export class PvDechetServiceService {
   addPvDechet(pvDechetData: any): Observable<any> {
     return this.http.post<any>(`${this.apiURL}/createPvDechet`, pvDechetData); // ✅ Use apiURL
   }
+  //sada9ni awel mara nakrah ki ysoubouli cnx 
+  GetAllPVByEmetteur(id:any):Observable<any>{
+    return   this.http.get(`${this.apiURL}/getAllPvDechetsByUser/${id}`)
+  }
+  savePvDechet(pvDechetData: any):Observable<any>{
+    return this.http.post<any>(this.apiURL+"/savePvDechet",pvDechet)
+  }
+
+
+
 }
+

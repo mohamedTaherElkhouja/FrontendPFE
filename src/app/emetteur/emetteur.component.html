@@ -2,9 +2,16 @@
   <div class="w-full max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
     <div class="text-center mb-4">
       <h2 class="text-xl font-bold text-gray-800">PV de déchets</h2>
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-blue-600"
+        [routerLink]="['/user/emetteur/dashboard', id]"
+      >
+        Accéder au Dashboard
+      </button>
     </div>
+    
 
-    <form [formGroup]="pvDechetForm" (ngSubmit)="submitAddPvDechet()">
+    <form [formGroup]="pvDechetForm">
       <div class="grid grid-cols-2 gap-4 mb-4">
         <div>
           <label class="block text-gray-700 text-sm font-bold mb-1">Date</label>
@@ -12,17 +19,26 @@
         </div>
         
         <div>
-          <select formControlName="Nature_Dechet"  name="Nature_Dechet" id="Nature_Dechet" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+          <label class="block text-gray-700 text-sm font-bold mb-1">Catégorie</label>
+          <select formControlName="Nature_Dechet" name="Nature_Dechet" id="Nature_Dechet" class="w-full px-3 py-2 border rounded">
             <option value="">Sélectionnez une catégorie</option>
             <option *ngFor="let c of categorie" [value]="c._id">{{c.type_Categorie}}</option>
-        </select>
+          </select>
         </div>
       </div>
-      <div>
-        <label class="block text-gray-700 text-sm font-bold mb-1">Type</label>
-        <input type="text" formControlName="Type_Dechet" name="Type_Dechet" id="Type_Dechet" class="w-full px-3 py-2 border rounded">
+      
+      <div class="grid grid-cols-2 gap-4 mb-4">
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-1">Service Émetteur</label>
+          <input type="text" formControlName="Service_Emetteur" id="Service_Emetteur" class="w-full px-3 py-2 border rounded">
+        </div>
+        <div>
+          <label class="block text-gray-700 text-sm font-bold mb-1">Type</label>
+          <input type="text" formControlName="Type_Dechet" name="Type_Dechet" id="Type_Dechet" class="w-full px-3 py-2 border rounded">
+        </div>
       </div>
-      <div class="grid grid-cols-1 gap-4 mb-4">
+      
+      <div class="grid grid-cols-2 gap-4 mb-4">
         <div>
           <label class="block text-gray-700 text-sm font-bold mb-1">Désignation</label>
           <input type="text" formControlName="Designation" class="w-full px-3 py-2 border rounded">
@@ -31,7 +47,9 @@
           <label class="block text-gray-700 text-sm font-bold mb-1">Quantité</label>
           <input type="number" formControlName="Quantite" class="w-full px-3 py-2 border rounded">
         </div>
-        
+      </div>
+      
+      <div class="grid grid-cols-2 gap-4 mb-4">
         <div>
           <label class="block text-gray-700 text-sm font-bold mb-1">N° de lot</label>
           <input type="number" formControlName="Num_lot" class="w-full px-3 py-2 border rounded">
@@ -41,16 +59,23 @@
           <label class="block text-gray-700 text-sm font-bold mb-1">Motif de rejet</label>
           <input type="text" formControlName="Motif_Rejet" class="w-full px-3 py-2 border rounded">
         </div>
-        <div>
-          <label class="block text-gray-700 text-sm font-bold mb-1">Commentaire</label>
-          <textarea formControlName="Commentaire" class="w-full px-3 py-2 border rounded" rows="3"></textarea>
-        </div>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-1">Commentaire</label>
+        <textarea formControlName="Commentaire" class="w-full px-3 py-2 border rounded" rows="3"></textarea>
       </div>
 
       <div class="flex justify-between mt-4">
-        <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded">Enregistré</button>
-        <button type="button" class="bg-yellow-500 text-white px-4 py-2 rounded">Modifié</button>
-        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded">Validé</button>
+        <!-- Save -->
+<button type="button" class="bg-blue-500 text-white px-4 py-2 rounded" (click)="submitSavePvDechet()">Enregistré</button>
+
+<!-- Edit (optional: could redirect to edit page or toggle editable fields) -->
+<button type="button" class="bg-yellow-500 text-white px-4 py-2 rounded">Modifié</button>
+
+<!-- Validate -->
+<button type="button" class="bg-green-500 text-white px-4 py-2 rounded" (click)="submitAddPvDechet()">Validé</button>
+
       </div>
     </form>
 

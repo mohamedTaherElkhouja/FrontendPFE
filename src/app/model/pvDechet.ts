@@ -6,10 +6,13 @@ export class pvDechet{
     Date_Creation!:Date
     Id_User!:String
     Nature_Dechet!:String
-    Type_Dechet!:String
+    Type_Dechet!:Number 
+    Service_Emetteur!:String
     Designation!:String
     Num_lot!:Number
-    
+    Quantite!:Number
     Motif_Rejet!:String
     Commentaire!:String
+    statut!:String
+    
 }

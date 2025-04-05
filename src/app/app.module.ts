@@ -9,6 +9,9 @@ import { EmetteurComponent } from './emetteur/emetteur.component';
 import { AQComponent } from './aq/aq.component';
 import { HSEComponent } from './hse/hse.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { EmetteurDashboardComponent } from './emetteur-dashboard/emetteur-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     LoginUtilisateurComponent,
     EmetteurComponent,
     AQComponent,
-    HSEComponent
+    HSEComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent,
+    EmetteurDashboardComponent
   ],
   imports: [
     BrowserModule,
