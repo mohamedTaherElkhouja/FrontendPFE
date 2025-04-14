@@ -19,7 +19,13 @@ export class PvDechetServiceService {
     return   this.http.get(`${this.apiURL}/getAllPvDechetsByUser/${id}`)
   }
   savePvDechet(pvDechetData: any):Observable<any>{
-    return this.http.post<any>(this.apiURL+"/savePvDechet",pvDechet)
+    return this.http.post<any>(this.apiURL+"/savePvDechet",pvDechetData)
+  }
+  fromSavedtoValidate(id:any):Observable<any>{
+    return this.http.put<any>(this.apiURL+`/fromSavedtoValidated/${id}`,{})
+  }
+  getPvDechetById(pvDechetId : any):Observable<any>{
+    return this.http.get<any>(this.apiURL+`/getPvDechetById/${pvDechetId}`)
   }
 
 

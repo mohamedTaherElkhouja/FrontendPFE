@@ -32,5 +32,35 @@ console.log(this.PvDechet)
     }
     )
   }
+  fromSavedtoValidated(dechetId: String){
+    if(confirm("are you sure you want to change validate?")){
+      this.PvSevice.fromSavedtoValidate(dechetId).subscribe(
+        response => { 
+          console.log ("your data is changed")
+          window.location.reload(); 
+        },
+        error => {
+          console.error("An error occurred:", error);
+        }
+      )
+    }
+  }
+  getPvDechetById(pvDechetId: String) {
+    this.PvSevice.getPvDechetById(pvDechetId).subscribe(
+      (response) => {
+        console.log("PvDechet received:", response);
+        if (Array.isArray(response)) {
+          this.PvDechet = response;
+        } else {
+          console.warn('Response is not an array:', response);
+          this.PvDechet = [response]; // Wrapping the object into an array
+        }
+      },
+      (error) => {
+        console.error("Error fetching PvDechet:", error);
+      }
+    );
+  }
+  
 
 }
