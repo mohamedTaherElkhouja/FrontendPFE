@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
 @import 'ngx-toastr/toastr';
 
@@ -9,7 +9,7 @@
 .toast-container {
   .ngx-toastr {
     @apply shadow-lg rounded-lg p-4 text-white;
-    min-width: 300px; /* Use direct CSS instead of Tailwind + CSS variable */
+    min-width: 300px;
     background-image: none !important;
 
     &.toast-success {
