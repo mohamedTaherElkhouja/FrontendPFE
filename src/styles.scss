@@ -1,0 +1,71 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import 'ngx-toastr/toastr';
+
+/* Toastr Custom Styles */
+.toast-container {
+  .ngx-toastr {
+    @apply shadow-lg rounded-lg p-4 text-white;
+    min-width: 300px; /* Use direct CSS instead of Tailwind + CSS variable */
+    background-image: none !important;
+
+    &.toast-success {
+      @apply bg-green-500;
+    }
+
+    &.toast-error {
+      @apply bg-red-500;
+    }
+
+    &.toast-warning {
+      @apply bg-yellow-500;
+    }
+
+    &.toast-info {
+      @apply bg-blue-500;
+    }
+  }
+
+  .toast-close-button {
+    @apply text-white opacity-75 hover:opacity-100;
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+  }
+
+  .toast-progress {
+    @apply bg-white opacity-25;
+  }
+}
+
+/* Toast Position */
+.toast-top-right {
+  top: 12px !important;
+  right: 12px !important;
+}
+
+/* Custom Animations */
+.toast-animate {
+  animation: slideInRight 0.3s ease-in-out, fadeIn 0.3s ease-in-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
