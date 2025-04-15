@@ -14,6 +14,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { EmetteurDashboardComponent } from './emetteur-dashboard/emetteur-dashboard.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NavbarComponent } from './layouts/navbar/navbar.component';
+import { SidebarComponent } from './layouts/sidebar/sidebar.component';
+import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +36,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    NavbarComponent,
+    SidebarComponent,
+    DashboardLayoutComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       timeOut: 3000,

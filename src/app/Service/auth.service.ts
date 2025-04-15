@@ -32,4 +32,8 @@ export class AuthService {
   resetPassword(token:any,newpassword : String):Observable<any>{
     return this.http.post(authAPI+`resetPassword/${token}`,{newpassword})
   }
+  
+  logout() {
+    window.sessionStorage.removeItem(userKey);
+  }
 }

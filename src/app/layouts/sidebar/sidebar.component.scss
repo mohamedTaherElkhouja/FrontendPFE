@@ -1,0 +1,13 @@
+.sidebar-link {
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #f3f4f6;
+    transform: translateX(5px);
+  }
+  
+  &.active {
+    background-color: #e5e7eb;
+    border-left: 4px solid #4f46e5;
+  }
+}

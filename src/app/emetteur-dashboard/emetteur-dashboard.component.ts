@@ -14,24 +14,37 @@ export class EmetteurDashboardComponent implements OnInit {
   constructor(private http:HttpClient,private auth : AuthService,private PvSevice: PvDechetServiceService){}
   id !:String
   PvDechet : pvDechet[]=[]
-  ngOnInit(): void {
-   this.id = this.auth.getUser().user._id
-   this.getAllPV(this.id)
+  userName: string = '';
+  totalPVs: number = 0;
+  pendingPVs: number = 0;
+  validatedPVs: number = 0;
 
+  ngOnInit(): void {
+    this.id = this.auth.getUser().user._id;
+    this.userName = this.auth.getUser().user.nom; // Assuming the user object has a 'nom' property
+    this.getAllPV(this.id);
   }
+
   getAllPV(id : String){
     this.PvSevice.GetAllPVByEmetteur(id).subscribe({
-      next : data =>{
-       
-this.PvDechet = data
-console.log(data)
-console.log(this.PvDechet)
-      },error :err =>{
-        console.log(err)
+      next : data => {
+        this.PvDechet = data;
+        this.calculateStatistics();
+        console.log(data);
+        console.log(this.PvDechet);
+      },
+      error : err => {
+        console.log(err);
       }
-    }
-    )
+    });
   }
+
+  private calculateStatistics() {
+    this.totalPVs = this.PvDechet.length;
+    this.pendingPVs = this.PvDechet.filter(pv => pv.statut === 'enregistrer').length;
+    this.validatedPVs = this.PvDechet.filter(pv => pv.statut === 'valider').length;
+  }
+
   fromSavedtoValidated(dechetId: String){
     if(confirm("are you sure you want to change validate?")){
       this.PvSevice.fromSavedtoValidate(dechetId).subscribe(

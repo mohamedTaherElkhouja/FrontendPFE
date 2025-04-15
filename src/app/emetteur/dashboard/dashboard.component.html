@@ -1,0 +1,90 @@
+<div class="space-y-6">
+  <!-- Welcome Section -->
+  <div class="bg-white rounded-lg shadow p-6">
+    <h1 class="text-2xl font-bold text-gray-800">Bienvenue, {{userName}}!</h1>
+    <p class="text-gray-600 mt-2">Gérez vos PV de déchets et suivez leur statut.</p>
+  </div>
+
+  <!-- Stats Section -->
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+    <!-- Total PVs -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <div class="flex items-center">
+        <div class="p-3 rounded-full bg-indigo-100">
+          <svg class="w-6 h-6 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+          </svg>
+        </div>
+        <div class="ml-4">
+          <h3 class="text-lg font-semibold text-gray-800">Total PVs</h3>
+          <p class="text-2xl font-bold text-indigo-600">{{totalPVs}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pending PVs -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <div class="flex items-center">
+        <div class="p-3 rounded-full bg-yellow-100">
+          <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+          </svg>
+        </div>
+        <div class="ml-4">
+          <h3 class="text-lg font-semibold text-gray-800">En attente</h3>
+          <p class="text-2xl font-bold text-yellow-600">{{pendingPVs}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Validated PVs -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <div class="flex items-center">
+        <div class="p-3 rounded-full bg-green-100">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <div class="ml-4">
+          <h3 class="text-lg font-semibold text-gray-800">Validés</h3>
+          <p class="text-2xl font-bold text-green-600">{{validatedPVs}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent PVs Section -->
+  <div class="bg-white rounded-lg shadow">
+    <div class="p-6">
+      <h2 class="text-xl font-bold text-gray-800 mb-4">PVs récents</h2>
+      <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+          <thead class="bg-gray-50">
+            <tr>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Catégorie</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
+              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-200">
+            <tr *ngFor="let pv of recentPVs">
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{pv.Date_Creation | date}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{pv.Nature_Dechet}}</td>
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{pv.Type_Dechet}}</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span [ngClass]="{
+                  'px-2 inline-flex text-xs leading-5 font-semibold rounded-full': true,
+                  'bg-yellow-100 text-yellow-800': pv.status === 'pending',
+                  'bg-green-100 text-green-800': pv.status === 'validated'
+                }">
+                  {{pv.status === 'pending' ? 'En attente' : 'Validé'}}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div> 

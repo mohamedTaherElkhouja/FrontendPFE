@@ -46,13 +46,13 @@ export class LoginUtilisateurComponent implements OnInit {
   
             switch (res.user.role) {
               case 'Emetteur':
-                this.router.navigate(["user/emetteur"]);
+                this.router.navigate(['/emetteur/dashboard']);
                 break;
               case 'AQ':
-                this.router.navigate(["user/AQ"]);
+                this.router.navigate(['/user/AQ']);
                 break;
               case 'HSE':
-                this.router.navigate(["user/HSE"]);
+                this.router.navigate(['/user/HSE']);
                 break;
             }
           } else {
