@@ -28,7 +28,12 @@ export class PvDechetServiceService {
     return this.http.get<any>(this.apiURL+`/getPvDechetById/${pvDechetId}`)
   }
 
-
+  modifyPv(pvId: string, data: any) {
+    return this.http.put(this.apiURL+`/modifyPvDechet/${pvId}`, data);
+  }
+  
+  
+  
 
 }
 
