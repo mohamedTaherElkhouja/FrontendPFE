@@ -2,12 +2,7 @@
   <div class="w-full max-w-4xl mx-auto bg-white shadow-lg rounded-lg p-6">
     <div class="text-center mb-4">
       <h2 class="text-xl font-bold text-gray-800">PV de déchets</h2>
-      <button
-        class="bg-blue-500 text-white px-4 py-2 rounded-md mt-2 hover:bg-blue-600"
-        [routerLink]="['/user/emetteur/dashboard', id]"
-      >
-        Accéder au Dashboard
-      </button>
+      
     </div>
     
 
@@ -70,8 +65,7 @@
         <!-- Save -->
 <button type="button" class="bg-blue-500 text-white px-4 py-2 rounded" (click)="submitSavePvDechet()">Enregistrer</button>
 
-<!-- Edit (optional: could redirect to edit page or toggle editable fields) -->
-<button type="button" class="bg-yellow-500 text-white px-4 py-2 rounded">Modifier</button>
+
 
 <!-- Validate -->
 <button type="button" class="bg-green-500 text-white px-4 py-2 rounded" (click)="submitAddPvDechet()">Valider</button>

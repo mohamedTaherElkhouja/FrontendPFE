@@ -23,7 +23,7 @@ const routes: Routes = [
     children: [
       {path :'emetteurdashaord',component :DashboardLayoutComponent , title:"DashbordLayout"},
       { path: 'pv', component: EmetteurComponent, title: "PV de déchets" },
-      {path:'dashbaord',component :EmetteurDashboardComponent,title :"Emetteur_Dashbord"}
+      {path:'dashbaord',component :EmetteurDashboardComponent,title :"emetteur_Dashbord"}
     ]
   },
   
