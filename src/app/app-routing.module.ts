@@ -9,7 +9,9 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { DashboardComponent } from './emetteur/dashboard/dashboard.component';
 import { EmetteurDashboardComponent } from './emetteur-dashboard/emetteur-dashboard.component';
-
+import { LoginAdminComponent } from './Admin/login-admin/login-admin.component';
+import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
+import { UsersPerviewComponent } from './users-perview/users-perview.component';
 const routes: Routes = [
   {path:'',redirectTo:"user/login",pathMatch:'full'},
   {path:'user/login',component:LoginUtilisateurComponent,title:"login_page"},
@@ -30,7 +32,10 @@ const routes: Routes = [
   // Other routes
   {path:'user/AQ',component:AQComponent,title:"AQ_Dashbord"},
   {path:'user/HSE',component:HSEComponent,title:"HSE_Dashbord"},
-  
+  // Amdin routes :
+  {path:"admin/login", component :LoginAdminComponent , title :"Admin_login"},
+  {path:"admin/dashboard",component:AdminDashboardComponent,title:"Admin_Dashbord"},
+  {path:"admin/users",component:UsersPerviewComponent,title:"Admin_Users_Perview"},
 ];
 
 @NgModule({
