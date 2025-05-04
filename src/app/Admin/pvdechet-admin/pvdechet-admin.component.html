@@ -11,58 +11,58 @@
       </div>
       
       <div class="bg-white p-8 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-semibold text-gray-800 mb-6">Users</h2>
+        <h2 class="text-2xl font-semibold text-gray-800 mb-6">PV Dechet</h2>
 
         <!-- Search Input -->
         <div class="mb-6">
           <input
             type="text"
-            placeholder="Search by name, email, or role"
-            [(ngModel)]="searchTerm"
-            (ngModelChange)="applyFilters()"
+            placeholder="Search by User Name or Nature Dechet"
+          
             class="border border-gray-300 rounded-lg px-4 py-3 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
           />
         </div>
 
-        <!-- Role Filter Dropdown -->
+        <!-- Filter Dropdown -->
         <div class="mb-6">
           <select 
-            [(ngModel)]="selectedRole" 
-            (ngModelChange)="applyFilters()"
+         
             class="border border-gray-300 rounded-lg px-4 py-3 w-full focus:ring-2 focus:ring-blue-500 focus:outline-none"
           >
-            <option value="">All Roles</option>
-            <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+            <option value="Id_User.name">Filter by User Name</option>
+            <option value="Nature_Dechet">Filter by Nature Dechet</option>
           </select>
         </div>
 
-        <!-- Users Table -->
+        <!-- PV Dechet Table -->
         <div class="overflow-x-auto">
           <table class="w-full border-collapse border border-gray-300 rounded-lg shadow-sm">
             <thead>
               <tr class="bg-gray-100">
                 <th class="border border-gray-300 px-6 py-3 text-left font-medium text-gray-700">#</th>
-                <th class="border border-gray-300 px-6 py-3 text-left font-medium text-gray-700">Name</th>
-                <th class="border border-gray-300 px-6 py-3 text-left font-medium text-gray-700">Email</th>
-                <th class="border border-gray-300 px-6 py-3 text-left font-medium text-gray-700">Role</th>
+                <th class="border border-gray-300 px-6 py-3 text-left font-medium text-gray-700">User Name</th>
+                <th class="border border-gray-300 px-6 py-3 text-left font-medium text-gray-700">Nature Dechet</th>
+                <th class="border border-gray-300 px-6 py-3 text-left font-medium text-gray-700">Designation</th>
+                <th class="border border-gray-300 px-6 py-3 text-left font-medium text-gray-700">Quantity</th>
                 <th class="border border-gray-300 px-6 py-3 text-left font-medium text-gray-700">Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr 
-                *ngFor="let user of filteredUsers; let i = index" 
+                *ngFor="let pv of PvDechet; let i = index" 
                 [class.bg-gray-50]="i % 2 === 1" 
                 class="hover:bg-gray-100 transition"
               >
                 <td class="border border-gray-300 px-6 py-3">{{ i + 1 }}</td>
-                <td class="border border-gray-300 px-6 py-3">{{ user.name }}</td>
-                <td class="border border-gray-300 px-6 py-3">{{ user.email }}</td>
-                <td class="border border-gray-300 px-6 py-3">{{ user.roleId?.nameRole }}</td>
+                <td class="border border-gray-300 px-6 py-3">{{ pv.Id_User.name }}</td>
+                <td class="border border-gray-300 px-6 py-3">{{ pv.Nature_Dechet.type_Categorie}}</td>
+                <td class="border border-gray-300 px-6 py-3">{{ pv.Designation }}</td>
+                <td class="border border-gray-300 px-6 py-3">{{ pv.Quantite }}</td>
                 <td class="border border-gray-300 px-6 py-3">
                   <button
                     type="button"
                     class="inline-flex items-center rounded bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-md transition duration-150 ease-in-out hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
-                    (click)="deleteUser(user._id)"
+                   
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                       <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6M9 7h6m-7 0a2 2 0 012-2h4a2 2 0 012 2m-8 0h8" />
@@ -81,9 +81,11 @@
             previousLabel="Prev"
             nextLabel="Next"
             [responsive]="true"
-            (pageChange)="handlepageChange($event)"
+           
           ></pagination-controls>
         </div>
       </div>
     </div>
 </div>
+
+

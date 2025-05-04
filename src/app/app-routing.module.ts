@@ -12,6 +12,8 @@ import { EmetteurDashboardComponent } from './emetteur-dashboard/emetteur-dashbo
 import { LoginAdminComponent } from './Admin/login-admin/login-admin.component';
 import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
 import { UsersPerviewComponent } from './users-perview/users-perview.component';
+import { PVDechetAdminComponent } from './Admin/pvdechet-admin/pvdechet-admin.component';
+import { SettingComponent } from './Admin/setting/setting.component';
 const routes: Routes = [
   {path:'',redirectTo:"user/login",pathMatch:'full'},
   {path:'user/login',component:LoginUtilisateurComponent,title:"login_page"},
@@ -36,6 +38,9 @@ const routes: Routes = [
   {path:"admin/login", component :LoginAdminComponent , title :"Admin_login"},
   {path:"admin/dashboard",component:AdminDashboardComponent,title:"Admin_Dashbord"},
   {path:"admin/users",component:UsersPerviewComponent,title:"Admin_Users_Perview"},
+  {path:"admin/pvdechet",component:PVDechetAdminComponent,title:"Admin_PVDechet"},
+  {path:"admin/settings",component:SettingComponent,title:"Admin_Settings"},
+
 ];
 
 @NgModule({

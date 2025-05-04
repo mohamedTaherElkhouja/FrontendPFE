@@ -24,6 +24,9 @@ import { SideAdminComponent } from './Admin/side-admin/side-admin.component';
 import { UsersPerviewComponent } from './users-perview/users-perview.component';
 import { SearchPipe } from './Admin/Search/search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { PVDechetAdminComponent } from './Admin/pvdechet-admin/pvdechet-admin.component';
+import { ProfileAdminComponent } from './Admin/profile-admin/profile-admin.component';
+import { SettingComponent } from './Admin/setting/setting.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,10 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NavAdminComponent,
     SideAdminComponent,
     UsersPerviewComponent,
-    SearchPipe
+    SearchPipe,
+    PVDechetAdminComponent,
+    ProfileAdminComponent,
+    SettingComponent
   ],
   imports: [
     BrowserModule,

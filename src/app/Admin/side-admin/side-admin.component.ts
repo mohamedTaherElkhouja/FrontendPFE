@@ -10,6 +10,7 @@ import { AdminServiceService } from 'src/app/Service/admin-service.service';
 })
 export class SideAdminComponent implements OnInit {
   NumberOfUsers : number = 0;
+  NumberOfPV : number = 0;
   isSidebarOpen = false;
   constructor(private adminService : AdminServiceService , private router : Router) { }
 
@@ -23,8 +24,21 @@ export class SideAdminComponent implements OnInit {
         console.error('Error fetching user count:', error);
       }
     );
+    this.adminService.countAllPV().subscribe(
+      (response) => {
+        this.NumberOfPV = response;
+        console.log('Number of PV:', this.NumberOfPV);
+      },
+      (error) => {
+        console.error('Error fetching PV count:', error);
+      }
+    );
   }
 
+
+  NumberOfPVDechet() {
+    
+  }
   toggleSidebar() {
     this.isSidebarOpen = !this.isSidebarOpen;
   }

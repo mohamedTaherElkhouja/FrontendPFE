@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Admin } from '../model/admin';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,20 @@ export class AdminServiceService {
   // Get all users
   getAllUsers() {
     return this.http.get<any>(`${this.adminURL}/getAllUsers`);
+  }
+
+  // Delete User 
+  deleteUser(id: string) {
+    return this.http.delete<any>(`${this.adminURL}/deleteUser/${id}`);
+  }
+  // Get COunt of all PV :
+  countAllPV() {
+    return this.http.get<any>(`${this.adminURL}/getDechetCount`);
+  }
+  getALlPVHistory() {
+    return this.http.get<any>(`${this.adminURL}/getAllPvHistory`);
+  }
+  CreateNewAdmin(admin: Admin) {
+    return this.http.post<any>(`${this.adminURL}/CreateAdmin`, admin);
   }
 }

@@ -18,7 +18,7 @@ export class UsersPerviewComponent {
     pageSized = [3,6,9]; // Options for items per page
     count =  0;
     serachText = '';
-    role = []
+    roles: string[] = ['Emetteur', 'AQ', 'HSE']
 
     constructor(private adminService: AdminServiceService) {}
 
@@ -47,6 +47,17 @@ export class UsersPerviewComponent {
       this.getUser();
     }
 
+    applyFilters(): void {
+      this.filteredUsers = this.users.filter((user) => {
+        const matchesRole = this.selectedRole ? user.roleId?.nameRole === this.selectedRole : true;
+        const matchesSearch = this.searchTerm
+          ? user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
+          : true;
+        return matchesRole && matchesSearch;
+      });
+    }
+
 
     getUser(){
       this.adminService.getAllUsers().subscribe(
@@ -60,5 +71,20 @@ export class UsersPerviewComponent {
         }
       );
     }
-   
+
+    deleteUser(id: string) {
+    if (confirm('Are you sure you want to delete this user?')) {
+      this.adminService.deleteUser(id).subscribe(
+        (response) => {
+          console.log('User deleted successfully:', response);
+          // Refresh the user list after deletion
+          window.location.reload();
+          this.getUser();
+        },
+        (error) => {
+          console.error('Error deleting user:', error);
+        }
+      );
+    }
+  }
 }
