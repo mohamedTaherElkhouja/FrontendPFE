@@ -9,28 +9,29 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { DashboardComponent } from './emetteur/dashboard/dashboard.component';
 import { EmetteurDashboardComponent } from './emetteur-dashboard/emetteur-dashboard.component';
+import { LoginAdminComponent } from './login-admin/login-admin.component';  // <= 🔥 IMPORT AdminLogin
 
 const routes: Routes = [
-  {path:'',redirectTo:"user/login",pathMatch:'full'},
-  {path:'user/login',component:LoginUtilisateurComponent,title:"login_page"},
-  {path:'user/forgetPassword',component:ForgetPasswordComponent,title:"FP_Dashboard"},
-  {path:'user/resetPassword/:token',component:ResetPasswordComponent,title:"Reset_Password"},
-  
-  // Emetteur routes with dashboard layout
+  { path: '', redirectTo: "user/login", pathMatch: 'full' },
+
+  { path: 'user/login', component: LoginUtilisateurComponent, title: "login_page" },
+  { path: 'user/forgetPassword', component: ForgetPasswordComponent, title: "FP_Dashboard" },
+  { path: 'user/resetPassword/:token', component: ResetPasswordComponent, title: "Reset_Password" },
+
+  { path: 'admin/login', component: LoginAdminComponent, title: "Admin_Login" }, // <= 🔥 AJOUTE ADMIN LOGIN
+
   {
     path: 'emetteur',
     component: DashboardLayoutComponent,
     children: [
-      {path :'emetteurdashaord',component :DashboardLayoutComponent , title:"DashbordLayout"},
+      { path: 'emetteurdashaord', component: DashboardLayoutComponent, title: "DashbordLayout" },
       { path: 'pv', component: EmetteurComponent, title: "PV de déchets" },
-      {path:'dashbaord',component :EmetteurDashboardComponent,title :"Emetteur_Dashbord"}
+      { path: 'dashbaord', component: EmetteurDashboardComponent, title: "emetteur_Dashbord" }
     ]
   },
-  
-  // Other routes
-  {path:'user/AQ',component:AQComponent,title:"AQ_Dashbord"},
-  {path:'user/HSE',component:HSEComponent,title:"HSE_Dashbord"},
-  
+
+  { path: 'user/AQ', component: AQComponent, title: "AQ_Dashbord" },
+  { path: 'user/HSE', component: HSEComponent, title: "HSE_Dashbord" },
 ];
 
 @NgModule({

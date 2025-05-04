@@ -17,6 +17,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
+import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { DashboardComponent } from './admin/dashboard/dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +30,12 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
     HSEComponent,
     ForgetPasswordComponent,
     ResetPasswordComponent,
-    EmetteurDashboardComponent
+    EmetteurDashboardComponent,
+    LoginAdminComponent,
+   
+    DashboardComponent,
+    SidebarComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

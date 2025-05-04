@@ -5,6 +5,7 @@ import { json } from 'body-parser';
 const authAPI="http://localhost:3000/auth/"
 const userKey="key_user"
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -36,4 +37,6 @@ export class AuthService {
   logout() {
     window.sessionStorage.removeItem(userKey);
   }
+ 
+  
 }
