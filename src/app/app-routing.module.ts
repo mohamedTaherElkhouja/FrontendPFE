@@ -9,8 +9,13 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { DashboardComponent } from './emetteur/dashboard/dashboard.component';
 import { EmetteurDashboardComponent } from './emetteur-dashboard/emetteur-dashboard.component';
-import { LoginAdminComponent } from './login-admin/login-admin.component';  // <= 🔥 IMPORT AdminLogin
-
+import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { UsersPerviewComponent } from './users-perview/users-perview.component';
+import { PVDechetAdminComponent } from './admin/pvdechet-admin/pvdechet-admin.component';
+import { SettingComponent } from './admin/setting/setting.component';
+import { AqValidesComponent } from './aq/aq-valides/aq-valides.component';
+import { HseValidesComponent } from './hse/hse-valides/hse-valides.component';
 const routes: Routes = [
   { path: '', redirectTo: "user/login", pathMatch: 'full' },
 
@@ -29,9 +34,21 @@ const routes: Routes = [
       { path: 'dashbaord', component: EmetteurDashboardComponent, title: "emetteur_Dashbord" }
     ]
   },
+  
+  { path: 'aq/valides', component: AqValidesComponent },
+  {path :'hse/valides',component:HseValidesComponent},
 
-  { path: 'user/AQ', component: AQComponent, title: "AQ_Dashbord" },
-  { path: 'user/HSE', component: HSEComponent, title: "HSE_Dashbord" },
+  
+  // Other routes
+  {path:'user/AQ',component:AQComponent,title:"AQ_Dashbord"},
+  {path:'user/HSE',component:HSEComponent,title:"HSE_Dashbord"},
+  // Amdin routes :
+  {path:"admin/login", component :LoginAdminComponent , title :"Admin_login"},
+  {path:"admin/dashboard",component:AdminDashboardComponent,title:"Admin_Dashbord"},
+  {path:"admin/users",component:UsersPerviewComponent,title:"Admin_Users_Perview"},
+  {path:"admin/pvdechet",component:PVDechetAdminComponent,title:"Admin_PVDechet"},
+  {path:"admin/settings",component:SettingComponent,title:"Admin_Settings"},
+
 ];
 
 @NgModule({

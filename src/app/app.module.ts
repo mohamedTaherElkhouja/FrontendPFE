@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LoginUtilisateurComponent } from './login-utilisateur/login-utilisateur.component';
 import { FormsModule } from '@angular/forms';
 import { EmetteurComponent } from './emetteur/emetteur.component';
-import { AQComponent } from './aq/aq.component';
 import { HSEComponent } from './hse/hse.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
@@ -17,8 +16,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
-import { LoginAdminComponent } from './login-admin/login-admin.component';
-import { DashboardComponent } from './admin/dashboard/dashboard/dashboard.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
+import { NavAdminComponent } from './admin/nav-admin/nav-admin.component';
+import { SideAdminComponent } from './admin/side-admin/side-admin.component';
+import { UsersPerviewComponent } from './users-perview/users-perview.component';
+import { SearchPipe } from './admin/Search/search.pipe';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PVDechetAdminComponent } from './admin/pvdechet-admin/pvdechet-admin.component';
+import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.component';
+import { SettingComponent } from './admin/setting/setting.component';
+import { AQComponent } from './aq/aq.component';
+import { AqValidesComponent } from './aq/aq-valides/aq-valides.component';
+import { SideAqComponent } from './aq/side-aq/side-aq.component';
+import { SideHseComponent } from './hse/side-hse/side-hse.component';
+import { HseValidesComponent } from './hse/hse-valides/hse-valides.component';
 
 
 @NgModule({
@@ -31,11 +43,21 @@ import { DashboardComponent } from './admin/dashboard/dashboard/dashboard.compon
     ForgetPasswordComponent,
     ResetPasswordComponent,
     EmetteurDashboardComponent,
+    AdminDashboardComponent,
     LoginAdminComponent,
-   
-    DashboardComponent,
-    SidebarComponent,
-    NavbarComponent
+    NavAdminComponent,
+    SideAdminComponent,
+    UsersPerviewComponent,
+    SearchPipe,
+    PVDechetAdminComponent,
+    ProfileAdminComponent,
+    SettingComponent,
+    HseValidesComponent,
+    
+    
+    
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -46,7 +68,11 @@ import { DashboardComponent } from './admin/dashboard/dashboard/dashboard.compon
     BrowserAnimationsModule,
     NavbarComponent,
     SidebarComponent,
+    NgxPaginationModule,
     DashboardLayoutComponent,
+    SideAqComponent,
+    SideHseComponent,
+    AqValidesComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       timeOut: 3000,

@@ -37,6 +37,13 @@ export class AuthService {
   logout() {
     window.sessionStorage.removeItem(userKey);
   }
- 
   
-}
+    // Existing methods and properties
+  
+    login(credentials: { email: string; password: string }): Observable<any> {
+      // Implement the login logic here, e.g., make an HTTP request to the backend
+      return this.http.post('/api/login', credentials);
+    }
+  }
+  
+

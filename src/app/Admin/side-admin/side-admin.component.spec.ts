@@ -1,16 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DashboardComponent } from './dashboard.component';
+import { SideAdminComponent } from './side-admin.component';
 
-describe('DashboardComponent', () => {
-  let component: DashboardComponent;
-  let fixture: ComponentFixture<DashboardComponent>;
+describe('SideAdminComponent', () => {
+  let component: SideAdminComponent;
+  let fixture: ComponentFixture<SideAdminComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [DashboardComponent]
+      declarations: [SideAdminComponent]
     });
-    fixture = TestBed.createComponent(DashboardComponent);
+    fixture = TestBed.createComponent(SideAdminComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
