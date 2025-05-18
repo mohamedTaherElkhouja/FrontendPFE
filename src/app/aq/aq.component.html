@@ -1,1 +1,118 @@
-<p>aq works!</p>
+<div class="flex min-h-screen bg-gray-100">
+  <!-- Sidebar (Fixed Left) -->
+  <app-side-aq class="w-64 bg-white shadow-lg"></app-side-aq>
+  <div class="flex-1 p-6 space-y-6">
+ 
+    <!-- Bienvenue AQ -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <h1 class="text-2xl font-bold text-gray-800">Bienvenue, {{userName}} (AQ)!</h1>
+      <p class="text-gray-600 mt-2">Consultez, contrôlez et validez les PV de déchets pharmaceutiques.</p>
+    </div>
+    
+    <!-- Statistiques -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">À valider</h3>
+        <p class="text-2xl font-bold text-purple-600">{{pvsAValider}}</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">Validés AQ</h3>
+        <p class="text-2xl font-bold text-purple-600">{{pvsValidesAQ}}</p>
+      </div>
+      <div class="bg-white rounded-lg shadow-lg p-6">
+        <h3 class="text-lg font-semibold text-gray-800 mb-1">Total traités</h3>
+        <p class="text-2xl font-bold text-purple-600">{{totalPvTraites}}</p>
+      </div>
+    </div>
+  
+    <!-- Filtres -->
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center space-x-2">
+        <input
+          type="text"
+          [(ngModel)]="searchReference"
+          (input)="filterPVs()"
+          placeholder="Rechercher par référence"
+          class="border border-gray-300 rounded px-4 py-2 w-64"
+        />
+        <select
+          [(ngModel)]="searchStatus"
+          (change)="filterPVs()"
+          class="border border-gray-300 rounded px-4 py-2"
+        >
+          <option value="">Tous les statuts</option>
+          <option value="valider">Validé</option>
+          <option value="enregistrer">Enregistré</option>
+        </select>
+      </div>
+    </div>
+  
+    <!-- Liste des PVs -->
+    <div class="bg-white rounded-lg shadow-lg">
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Liste des PV à valider</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead class="bg-purple-100">
+              <tr>
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Référence</th>
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Date</th>
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Quantité</th>
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Statut</th>
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Action</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-purple-100">
+              <tr *ngFor="let pv of filteredPvDechet" class="hover:bg-purple-50 transition-colors duration-150">
+                <td class="px-6 py-4">{{ pv.Designation }}</td>
+                <td class="px-6 py-4">{{ pv.Date_Creation | date: 'dd/MM/yyyy' }}</td>
+                <td class="px-6 py-4">{{ pv.Quantite }} kg</td>
+                <td class="px-6 py-4">
+                  <span class="px-3 py-1 rounded-full text-xs font-semibold"
+                    [ngClass]="{
+                      'bg-green-200 text-green-900': pv.AQ_Validated,
+                      'bg-yellow-200 text-yellow-900': !pv.AQ_Validated
+                    }">
+                    {{ pv.AQ_Validated ? 'Validé AQ' : 'À valider' }}
+                  </span>
+                </td>
+                <td class="px-6 py-4">
+                  <button *ngIf="!pv.AQ_Validated" (click)="openValidationModal(pv)"
+                    class="px-3 py-1.5 text-xs font-medium text-white bg-green-600 rounded-md hover:bg-green-700">
+                    Valider AQ
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Modal de validation AQ -->
+    <div *ngIf="selectedPvForAQ" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div class="bg-white p-6 rounded-lg w-full max-w-xl shadow-lg">
+        <h2 class="text-lg font-semibold mb-4">Validation AQ du PV</h2>
+        <form (ngSubmit)="validatePvByAQ()">
+          <div class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Quantité avant destruction</label>
+              <input type="number" [(ngModel)]="selectedPvForAQ.AQ_Quantite_Avant" name="aqAvant" class="w-full border rounded px-3 py-2" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Quantité après destruction</label>
+              <input type="number" [(ngModel)]="selectedPvForAQ.AQ_Quantite_Apres" name="aqApres" class="w-full border rounded px-3 py-2" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-700">Commentaire AQ</label>
+              <textarea [(ngModel)]="selectedPvForAQ.AQ_Commentaire" name="aqCommentaire" class="w-full border rounded px-3 py-2"></textarea>
+            </div>
+          </div>
+          <div class="mt-6 flex justify-end space-x-2">
+            <button type="button" (click)="selectedPvForAQ = null" class="px-4 py-2 bg-gray-300 text-gray-700 rounded">Annuler</button>
+            <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Valider</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

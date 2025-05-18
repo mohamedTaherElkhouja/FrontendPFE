@@ -21,6 +21,12 @@ export class SettingComponent {
     password : '',
   }
   confirmPassword : string = '';
+  user = {
+    name: '',
+    email: '',
+    password: '',
+    role: ''
+  };
   // Open Create Admin Modal
   openCreateAdminModal(): void {
     this.isCreateAdminModalOpen = true;
@@ -39,6 +45,7 @@ export class SettingComponent {
   // Close Create User Modal
   closeCreateUserModal(): void {
     this.isCreateUserModalOpen = false;
+    this.resetUserForm();
   }
   createAdmin() {
     if (this.confirmPassword !== this.admin.password) {
@@ -59,4 +66,18 @@ export class SettingComponent {
     );
   }
 }
+  createUser() {
+    console.log('User created:', this.user);
+    // Add your logic to send the user data to the backend here
+    this.closeCreateUserModal();
+  }
+
+  resetUserForm() {
+    this.user = {
+      name: '',
+      email: '',
+      password: '',
+      role: ''
+    };
+  }
 }

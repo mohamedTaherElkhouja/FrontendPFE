@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { LoginUtilisateurComponent } from './login-utilisateur/login-utilisateur.component';
 import { FormsModule } from '@angular/forms';
 import { EmetteurComponent } from './emetteur/emetteur.component';
-import { AQComponent } from './aq/aq.component';
 import { HSEComponent } from './hse/hse.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
@@ -27,6 +26,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PVDechetAdminComponent } from './Admin/pvdechet-admin/pvdechet-admin.component';
 import { ProfileAdminComponent } from './Admin/profile-admin/profile-admin.component';
 import { SettingComponent } from './Admin/setting/setting.component';
+import { AQComponent } from './aq/aq.component';
+import { AqValidesComponent } from './aq/aq-valides/aq-valides.component';
+import { SideAqComponent } from './aq/side-aq/side-aq.component';
+import { SideHseComponent } from './hse/side-hse/side-hse.component';
+import { HseValidesComponent } from './hse/hse-valides/hse-valides.component';
+import { ProfilEmetteurComponent } from './Users/profil-emetteur/profil-emetteur.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +52,13 @@ import { SettingComponent } from './Admin/setting/setting.component';
     SearchPipe,
     PVDechetAdminComponent,
     ProfileAdminComponent,
-    SettingComponent
+    SettingComponent,
+    HseValidesComponent,
+    ProfilEmetteurComponent
+    
+    
+    
+    
   ],
   imports: [
     BrowserModule,
@@ -59,6 +71,9 @@ import { SettingComponent } from './Admin/setting/setting.component';
     SidebarComponent,
     NgxPaginationModule,
     DashboardLayoutComponent,
+    SideAqComponent,
+    SideHseComponent,
+    AqValidesComponent,
     ToastrModule.forRoot({
       positionClass: 'toast-top-right',
       timeOut: 3000,

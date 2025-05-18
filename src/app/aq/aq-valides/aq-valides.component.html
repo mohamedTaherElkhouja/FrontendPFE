@@ -1,0 +1,46 @@
+<div class="flex min-h-screen bg-gray-100">
+  <!-- Sidebar -->
+  <app-side-aq class="w-64 bg-white shadow-lg"></app-side-aq>
+
+  <!-- Main Content -->
+  <div class="flex-1 p-6 space-y-6">
+      <h1 class="text-2xl font-bold text-gray-800 mb-4">Historique des PV validés par AQ</h1>
+  
+      <div class="bg-white rounded-lg shadow overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200 text-sm text-left">
+          <thead class="bg-purple-100 text-purple-900 uppercase font-semibold">
+            <tr>
+              <th class="px-6 py-3">#</th> <!-- Add numbering column -->
+              <th class="px-6 py-3">Référence</th>
+              <th class="px-6 py-3">Date de création</th>
+              <th class="px-6 py-3">Quantité initiale</th>
+              <th class="px-6 py-3">Quantité après</th>
+              <th class="px-6 py-3">Commentaire AQ</th>
+              <th class="px-6 py-3">Motif rejet</th>
+              <th class="px-6 py-3">Statut</th>
+            </tr>
+          </thead>
+          <tbody class="bg-white divide-y divide-gray-100">
+            <tr *ngFor="let pv of pvValides; let i = index" class="hover:bg-gray-50">
+                <td class="px-6 py-4">{{ i + 1 }}</td> <!-- Display numbering -->
+                <td class="px-6 py-4">{{ pv.Designation }}</td>
+                <td class="px-6 py-4">{{ pv.Date_Creation | date: 'dd/MM/yyyy' }}</td>
+                <td class="px-6 py-4">{{ pv.AQ_Quantite_Avant }} kg</td>
+                <td class="px-6 py-4">{{ pv.AQ_Quantite_Apres }} kg</td>
+                <td class="px-6 py-4">{{ pv.AQ_Commentaire || '—' }}</td>
+                <td class="px-6 py-4">{{ pv.Motif_Rejet || '—' }}</td>
+                <td class="px-6 py-4">
+                  <span class="px-2 py-1 text-xs font-semibold rounded-full"
+                    [ngClass]="{
+                      'bg-green-200 text-green-800': pv.statut === 'valider',
+                      'bg-yellow-200 text-yellow-800': pv.statut === 'enregistrer'
+                    }">
+                    {{ pv.statut }}
+                  </span>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>

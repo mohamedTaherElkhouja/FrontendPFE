@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { json } from 'body-parser';
 const authAPI="http://localhost:3000/auth/"
 const userKey="key_user"
+const useApi = "http://localhost:3000/user/"
 
 @Injectable({
   providedIn: 'root'
@@ -36,4 +37,18 @@ export class AuthService {
   logout() {
     window.sessionStorage.removeItem(userKey);
   }
-}
+  
+    // Existing methods and properties
+  
+    login(credentials: { email: string; password: string }): Observable<any> {
+      // Implement the login logic here, e.g., make an HTTP request to the backend
+      return this.http.post('/api/login', credentials);
+    }
+
+    updateUser(id : string, userData: any): Observable<any> {
+      // Implement the update user logic here, e.g., make an HTTP request to the backend
+      return this.http.put(`${useApi}/updateUser/${id}`, userData);
+    }
+  }
+  
+

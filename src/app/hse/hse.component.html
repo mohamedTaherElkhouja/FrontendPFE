@@ -1,1 +1,100 @@
-<p>hse works!</p>
+<div class="flex min-h-screen bg-gray-100">
+  <!-- Sidebar (Fixed Left) -->
+  <app-side-hse class="w-64 bg-white shadow-lg"></app-side-hse> <!-- Replace with HSE-specific sidebar -->
+
+  <!-- Main Content -->
+  <div class="flex-1 p-6 space-y-6">
+    <!-- Welcome Section -->
+    <div class="bg-white rounded-lg shadow p-6">
+      <h1 class="text-2xl font-bold text-gray-800">Bienvenue,  (HSE)!</h1>
+      <p class="text-gray-600 mt-2">Consultez et validez les PV de déchets pharmaceutiques.</p>
+    </div>
+
+    <!-- List of PVs for Validation -->
+    <div class="bg-white rounded-lg shadow-lg">
+      <div class="p-6">
+        <h2 class="text-xl font-bold text-gray-800 mb-4">Liste des PV à valider</h2>
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead class="bg-purple-100">
+              <tr>
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">#</th> <!-- Add numbering column -->
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Référence</th>
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Date</th>
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Quantité</th>
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Action</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-purple-100">
+              <tr *ngFor="let pv of pvsForHSE; let i = index" class="hover:bg-purple-50">
+                <td class="px-6 py-4">{{ i + 1 }}</td> <!-- Display numbering -->
+                <td class="px-6 py-4">{{ pv.Designation }}</td>
+                <td class="px-6 py-4">{{ pv.Date_Creation | date: 'dd/MM/yyyy' }}</td>
+                <td class="px-6 py-4">{{ pv.Quantite }} kg</td>
+                <td class="px-6 py-4">
+                  <button (click)="openValidationModal(pv)" class="px-3 py-1.5 text-xs font-medium text-white bg-green-600 rounded-md hover:bg-green-700">
+                    Valider
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Validation -->
+    <div *ngIf="selectedPv" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div class="bg-white p-6 rounded-lg w-full max-w-xl shadow-lg">
+        <h2 class="text-lg font-semibold mb-4">Validation du PV</h2>
+        <div class="space-y-4">
+          <div>
+            <h3 class="text-sm font-medium text-gray-700">Référence:</h3>
+            <p class="text-gray-800">{{ selectedPv.Designation }}</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-gray-700">Date de création:</h3>
+            <p class="text-gray-800">{{ selectedPv.Date_Creation | date: 'dd/MM/yyyy' }}</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-gray-700">Quantité:</h3>
+            <p class="text-gray-800">{{ selectedPv.Quantite }} kg</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-gray-700">Validation Emetteur:</h3>
+            <p class="text-gray-800">
+              <span *ngIf="selectedPv.statut === 'valider'; else notValidated">
+                Validé par l'émetteur
+              </span>
+              <ng-template #notValidated>
+                Non validé par l'émetteur
+              </ng-template>
+            </p>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium text-gray-700">Validation AQ:</h3>
+            <p class="text-gray-800">
+              <span *ngIf="selectedPv.AQ_Validated; else notValidatedAQ">
+                Validé par AQ
+              </span>
+              <ng-template #notValidatedAQ>
+                Non validé par AQ
+              </ng-template>
+            </p>
+            <p class="text-gray-800">Quantité avant: {{ selectedPv.AQ_Quantite_Avant }} kg</p>
+            <p class="text-gray-800">Quantité après: {{ selectedPv.AQ_Quantite_Apres }} kg</p>
+            <p class="text-gray-800">Commentaire AQ: {{ selectedPv.AQ_Commentaire || '—' }}</p>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Commentaire HSE</label>
+            <textarea [(ngModel)]="HSE_Commentaire" name="HSE_Commentaire" class="w-full border rounded px-3 py-2"></textarea>
+          </div>
+        </div>
+        <div class="mt-6 flex justify-end space-x-2">
+          <button type="button" (click)="closeValidationModal()" class="px-4 py-2 bg-gray-300 text-gray-700 rounded">Annuler</button>
+          <button (click)="validatePvByHSE()" class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">Valider</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

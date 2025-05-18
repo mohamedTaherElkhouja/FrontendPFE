@@ -19,8 +19,10 @@ interface NavItem {
 export class NavbarComponent implements OnInit {
   userName: string = '';
   navItems: NavItem[] = [
-    { label: 'Dashboard', link: '/emetteur/dashboard', icon: 'fas fa-home' },
-    { label: 'PV de déchets', link: '/emetteur/pv', icon: 'fas fa-file-alt' }
+    { label: 'Dashboard', link: '/emetteur/dashbaord', icon: 'fas fa-home' },
+    { label: 'PV de déchets', link: '/emetteur/pv', icon: 'fas fa-file-alt' },
+
+
   ];
 
   constructor(

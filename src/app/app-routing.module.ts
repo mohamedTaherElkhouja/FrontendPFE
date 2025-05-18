@@ -10,26 +10,36 @@ import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-l
 import { DashboardComponent } from './emetteur/dashboard/dashboard.component';
 import { EmetteurDashboardComponent } from './emetteur-dashboard/emetteur-dashboard.component';
 import { LoginAdminComponent } from './Admin/login-admin/login-admin.component';
-import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
+import { AdminDashboardComponent } from './Admin/admin-dashboard//admin-dashboard.component';
 import { UsersPerviewComponent } from './users-perview/users-perview.component';
 import { PVDechetAdminComponent } from './Admin/pvdechet-admin/pvdechet-admin.component';
 import { SettingComponent } from './Admin/setting/setting.component';
+import { AqValidesComponent } from './aq/aq-valides/aq-valides.component';
+import { HseValidesComponent } from './hse/hse-valides/hse-valides.component';
+import { ProfilEmetteurComponent } from './Users/profil-emetteur/profil-emetteur.component';
 const routes: Routes = [
-  {path:'',redirectTo:"user/login",pathMatch:'full'},
-  {path:'user/login',component:LoginUtilisateurComponent,title:"login_page"},
-  {path:'user/forgetPassword',component:ForgetPasswordComponent,title:"FP_Dashboard"},
-  {path:'user/resetPassword/:token',component:ResetPasswordComponent,title:"Reset_Password"},
-  
-  // Emetteur routes with dashboard layout
+  { path: '', redirectTo: "user/login", pathMatch: 'full' },
+
+  { path: 'user/login', component: LoginUtilisateurComponent, title: "login_page" },
+  { path: 'user/forgetPassword', component: ForgetPasswordComponent, title: "FP_Dashboard" },
+  { path: 'user/resetPassword/:token', component: ResetPasswordComponent, title: "Reset_Password" },
+
+  { path: 'admin/login', component: LoginAdminComponent, title: "Admin_Login" }, // <= 🔥 AJOUTE ADMIN LOGIN
+
   {
     path: 'emetteur',
     component: DashboardLayoutComponent,
     children: [
-      {path :'emetteurdashaord',component :DashboardLayoutComponent , title:"DashbordLayout"},
+      { path: 'emetteurdashaord', component: DashboardLayoutComponent, title: "DashbordLayout" },
       { path: 'pv', component: EmetteurComponent, title: "PV de déchets" },
-      {path:'dashbaord',component :EmetteurDashboardComponent,title :"emetteur_Dashbord"}
+      { path: 'dashbaord', component: EmetteurDashboardComponent, title: "emetteur_Dashbord" },
+      {path : 'profil', component: ProfilEmetteurComponent, title: "emetteur_profil" },
     ]
   },
+  
+  { path: 'aq/valides', component: AqValidesComponent },
+  {path :'hse/valides',component:HseValidesComponent},
+
   
   // Other routes
   {path:'user/AQ',component:AQComponent,title:"AQ_Dashbord"},
@@ -40,6 +50,7 @@ const routes: Routes = [
   {path:"admin/users",component:UsersPerviewComponent,title:"Admin_Users_Perview"},
   {path:"admin/pvdechet",component:PVDechetAdminComponent,title:"Admin_PVDechet"},
   {path:"admin/settings",component:SettingComponent,title:"Admin_Settings"},
+  
 
 ];
 

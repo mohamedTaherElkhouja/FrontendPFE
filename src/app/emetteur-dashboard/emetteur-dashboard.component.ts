@@ -5,19 +5,22 @@ import { PvDechetServiceService } from '../Service/pv-dechet-service.service';
 import { pvDechet } from '../model/pvDechet';
 import { Categorie } from '../model/categorie';
 import { CategorieService } from '../Service/categorie.service';
+import { DatePipe } from '@angular/common'; // Import DatePipe
 
 @Component({
   selector: 'app-emetteur-dashboard',
   templateUrl: './emetteur-dashboard.component.html',
-  styleUrls: ['./emetteur-dashboard.component.scss']
+  styleUrls: ['./emetteur-dashboard.component.scss'],
+  providers: [DatePipe] // Add DatePipe to providers
 })
 export class EmetteurDashboardComponent implements OnInit {
   categorie: Categorie[] | any;
   constructor(
+    private datePipe: DatePipe,
     private http: HttpClient,
     private auth: AuthService,
     private PvService: PvDechetServiceService,
-    private CategerieSer : CategorieService
+    private CategerieSer: CategorieService
   ) {}
 
   id!: String;
@@ -27,13 +30,14 @@ export class EmetteurDashboardComponent implements OnInit {
   pendingPVs: number = 0;
   validatedPVs: number = 0;
   selectedPv: any = null;
-
+  searchReference: string = '';
+  searchStatus: string = '';
 
   ngOnInit(): void {
     this.id = this.auth.getUser().user._id;
     this.userName = this.auth.getUser().user.nom;
     this.getAllPV(this.id);
-    this.getAllCategorie()
+    this.getAllCategorie();
   }
 
   getAllPV(id: String) {
@@ -48,18 +52,19 @@ export class EmetteurDashboardComponent implements OnInit {
       }
     });
   }
-  getAllCategorie(){
-    this.CategerieSer.getAllCategories(this.categorie).subscribe(
-      {
-        next :data =>{
-          this.categorie = data
-          console.log(this.categorie)
-        }, error :e =>{
-          console.log(e)
-        }
+
+  getAllCategorie() {
+    this.CategerieSer.getAllCategories(this.categorie).subscribe({
+      next: data => {
+        this.categorie = data;
+        console.log(this.categorie);
+      },
+      error: e => {
+        console.log(e);
       }
-    )
+    });
   }
+
   private calculateStatistics() {
     this.totalPVs = this.PvDechet.length;
     this.pendingPVs = this.PvDechet.filter(pv => pv.statut === 'enregistrer').length;
@@ -93,45 +98,47 @@ export class EmetteurDashboardComponent implements OnInit {
   }
 
   modifyPvDechet(pvId: string) {
-    const pv = this.PvDechet.find(p => p._id === pvId);
-    if (!pv) {
-      console.error("PV not found");
+    if (!this.selectedPv) {
+      console.error("No PV selected for modification");
       return;
     }
 
-    const payload = {
+    // Format Date_Creation to YYYY-MM-DD
+    const formattedDate = this.datePipe.transform(this.selectedPv.Date_Creation, 'yyyy-MM-dd');
 
-      Nature_Dechet: pv.Nature_Dechet,
-      Type_Dechet: pv.Type_Dechet,
-      Service_Emetteur: pv.Service_Emetteur,
-      Designation: pv.Designation,
-      Quantite: pv.Quantite,
-      Num_lot: pv.Num_lot,
-      Motif_Rejet: pv.Motif_Rejet,
-      Commentaire: pv.Commentaire
+    const payload = {
+      Nature_Dechet: this.selectedPv.Nature_Dechet,
+      Type_Dechet: this.selectedPv.Type_Dechet,
+      Service_Emetteur: this.selectedPv.Service_Emetteur,
+      Designation: this.selectedPv.Designation,
+      Quantite: this.selectedPv.Quantite,
+      Num_lot: this.selectedPv.Num_lot,
+      Motif_Rejet: this.selectedPv.Motif_Rejet,
+      Commentaire: this.selectedPv.Commentaire,
+      Date_Creation: formattedDate // Use the formatted date
     };
+
+    console.log("Sending payload for modification:", payload);
+    console.log("Sending payload for modification:", payload);
 
     this.PvService.modifyPv(pvId, payload).subscribe({
       next: res => {
-        console.log("PV modifié avec succès", res);
-        this.getAllPV(this.id);
+        console.log("PV modified successfully", res);
+        this.selectedPv = null; // Clear the selected PV after modification
+        this.getAllPV(this.id); // Refresh the list of PVs
       },
       error: err => {
-        console.error("Erreur lors de la modification", err);
+        console.error("Error during modification", err);
       }
     });
   }
 
-
-  
-
   openEditModal(pv: any) {
-    // Format the date to YYYY-MM-DD when opening the modal
     const pvCopy = { ...pv };
     if (pvCopy.Date_Creation) {
       const date = new Date(pvCopy.Date_Creation);
       if (!isNaN(date.getTime())) {
-        pvCopy.Date_Creation = date.toISOString().split('T')[0];
+        pvCopy.Date_Creation = this.datePipe.transform(date, 'yyyy-MM-dd'); // Format to YYYY-MM-DD
       }
     }
     this.selectedPv = pvCopy;
@@ -139,10 +146,9 @@ export class EmetteurDashboardComponent implements OnInit {
 
   onDateChange(event: any) {
     if (event) {
-      // Ensure the date is in the correct format when it changes
       const date = new Date(event);
       if (!isNaN(date.getTime())) {
-        this.selectedPv.Date_Creation = date.toISOString().split('T')[0];
+        this.selectedPv.Date_Creation = this.datePipe.transform(date, 'yyyy-MM-dd'); // Format to YYYY-MM-DD
       }
     }
   }
@@ -150,24 +156,16 @@ export class EmetteurDashboardComponent implements OnInit {
   updatePv() {
     if (!this.selectedPv) return;
 
-    // Create a copy of the selected PV
     const updatedPv = { ...this.selectedPv };
-    
-    // Convert the date string to a Date object for MongoDB
+
     if (updatedPv.Date_Creation) {
       try {
-        // Parse the date string (assuming it's in YYYY-MM-DD format)
         const [year, month, day] = updatedPv.Date_Creation.split('-').map(Number);
-        
-        // Create a new Date object (use noon to avoid timezone issues)
         const date = new Date(year, month - 1, day, 12, 0, 0);
-        
         if (isNaN(date.getTime())) {
           console.error('Invalid date');
           return;
         }
-        
-        // Assign the Date object directly
         updatedPv.Date_Creation = date;
       } catch (error) {
         console.error('Error processing date:', error);
@@ -175,14 +173,12 @@ export class EmetteurDashboardComponent implements OnInit {
       }
     }
 
-    // Remove any undefined or null values from the payload
     Object.keys(updatedPv).forEach(key => {
       if (updatedPv[key] === undefined || updatedPv[key] === null) {
         delete updatedPv[key];
       }
     });
 
-    // Log the payload for debugging
     console.log('Sending payload:', updatedPv);
 
     this.PvService.modifyPv(updatedPv._id, updatedPv).subscribe(
@@ -195,5 +191,24 @@ export class EmetteurDashboardComponent implements OnInit {
         console.error('Erreur lors de la mise à jour du PV', err);
       }
     );
+  }
+
+  onSubmit() {
+    if (this.selectedPv) {
+      // Call modifyPvDechet with the selected PV's ID
+      this.modifyPvDechet(this.selectedPv._id);
+    }
+  }
+
+  get filteredPvDechet() {
+    return this.PvDechet.filter(pv => {
+      const matchesReference = this.searchReference
+        ? pv.Designation.toLowerCase().includes(this.searchReference.toLowerCase())
+        : true;
+      const matchesStatus = this.searchStatus
+        ? pv.statut === this.searchStatus
+        : true;
+      return matchesReference && matchesStatus;
+    });
   }
 }
