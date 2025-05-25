@@ -5,8 +5,8 @@
     <div class="absolute w-48 h-48 rounded-xl bg-purple-300 -bottom-6 -right-10 transform rotate-12 hidden md:block"></div>
     <form [formGroup]="loginForm" (ngSubmit)="login()" class="py-12 px-12 bg-white rounded-2xl shadow-xl z-20">
       <div>
-        <h1 class="text-3xl font-bold text-center mb-4 cursor-pointer">Admin Login</h1>
-        <p class="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">Sign in to manage the platform and access admin features.</p>
+        <h1 class="text-3xl font-bold text-center mb-4 cursor-pointer">Connexion Administrateur</h1>
+        <p class="w-80 text-center text-sm mb-8 font-semibold text-gray-700 tracking-wide cursor-pointer">Connectez-vous pour gérer la plateforme et accéder aux fonctionnalités administrateur.</p>
       </div>
       <div class="space-y-4">
         <input 
@@ -28,7 +28,7 @@
           [disabled]="loginForm.invalid" 
           class="w-full py-2 text-xl text-white bg-purple-400 rounded-lg hover:bg-purple-500 transition-all"
         >
-          Login
+          Connexion
         </button>
        
       </div>

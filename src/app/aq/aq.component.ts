@@ -22,12 +22,19 @@ export class AQComponent implements OnInit {
   filteredPvDechet: pvDechet[] = [];
 
   selectedPvForAQ: pvDechet | null = null;
+  aqUserId: string = '';
+
   constructor(private pvService: PvDechetServiceService, private http: HttpClient) {}
  
 
   ngOnInit(): void {
+    // Example: get user from AuthService/sessionStorage
+    const user = JSON.parse(sessionStorage.getItem('user_key') || '{}');
+     // Adjust key/field as needed
+     console.log('Rôle utilisateur:', user.role);
     this.loadPVs();
   }
+
   loadPVs(): void {
     const url = 'http://localhost:3000/pvDechet/getPvDechetsByAQ';
   
@@ -57,25 +64,26 @@ export class AQComponent implements OnInit {
 
   validatePvByAQ(): void {
     if (!this.selectedPvForAQ) return;
-  
+
     const {
       _id,
       AQ_Commentaire,
       AQ_Quantite_Avant,
       AQ_Quantite_Apres
     } = this.selectedPvForAQ;
-  
-    this.pvService.validatePvByAQ(_id.toString(), {
+
+    this.pvService.validatePvByAQ(_id?.toString(), {
       AQ_Validated: true,
-      AQ_Commentaire,
-      AQ_Quantite_Avant,
-      AQ_Quantite_Apres,
-      statut: 'valider' // ➕ On envoie également le statut à mettre à jour
+      AQ_Commentaire: AQ_Commentaire || '',
+      AQ_Quantite_Avant: AQ_Quantite_Avant || 0,
+      AQ_Quantite_Apres: AQ_Quantite_Apres || 0,
+      
+      statut: 'valider'
     }).subscribe({
       next: () => {
         console.log('PV validé avec succès et statut mis à jour.');
         this.selectedPvForAQ = null;
-        this.loadPVs(); 
+        this.loadPVs();
       },
       error: (error) => {
         console.error('Erreur lors de la validation du PV :', error);

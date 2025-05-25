@@ -1,13 +1,29 @@
 <div class="flex min-h-screen bg-gray-100">
   <!-- Sidebar (Fixed Left) -->
-  <app-side-hse class="w-64 bg-white shadow-lg"></app-side-hse> <!-- Replace with HSE-specific sidebar -->
+  <app-side-hse class="w-64 bg-white shadow-lg"></app-side-hse>
 
   <!-- Main Content -->
   <div class="flex-1 p-6 space-y-6">
     <!-- Welcome Section -->
     <div class="bg-white rounded-lg shadow p-6">
-      <h1 class="text-2xl font-bold text-gray-800">Bienvenue,  (HSE)!</h1>
+      <h1 class="text-2xl font-bold text-gray-800">Bienvenue, (HSE)!</h1>
       <p class="text-gray-600 mt-2">Consultez et validez les PV de déchets pharmaceutiques.</p>
+    </div>
+
+    <!-- Statistiques Section -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-purple-100 rounded-lg p-4 flex flex-col items-center shadow">
+        <span class="text-3xl font-bold text-purple-700">{{ pvsAValider }}</span>
+        <span class="text-gray-700 mt-2 text-center">PV à valider</span>
+      </div>
+      <div class="bg-green-100 rounded-lg p-4 flex flex-col items-center shadow">
+        <span class="text-3xl font-bold text-green-700">{{ pvsValidesHSE }}</span>
+        <span class="text-gray-700 mt-2 text-center">PV validés par HSE</span>
+      </div>
+      <div class="bg-blue-100 rounded-lg p-4 flex flex-col items-center shadow">
+        <span class="text-3xl font-bold text-blue-700">{{ totalPvTraites }}</span>
+        <span class="text-gray-700 mt-2 text-center">Total PV traités</span>
+      </div>
     </div>
 
     <!-- List of PVs for Validation -->
@@ -18,7 +34,7 @@
           <table class="w-full text-left">
             <thead class="bg-purple-100">
               <tr>
-                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">#</th> <!-- Add numbering column -->
+                <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">#</th>
                 <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Référence</th>
                 <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Date</th>
                 <th class="px-6 py-3 text-sm font-semibold text-purple-900 border-b">Quantité</th>
@@ -27,7 +43,7 @@
             </thead>
             <tbody class="bg-white divide-y divide-purple-100">
               <tr *ngFor="let pv of pvsForHSE; let i = index" class="hover:bg-purple-50">
-                <td class="px-6 py-4">{{ i + 1 }}</td> <!-- Display numbering -->
+                <td class="px-6 py-4">{{ i + 1 }}</td>
                 <td class="px-6 py-4">{{ pv.Designation }}</td>
                 <td class="px-6 py-4">{{ pv.Date_Creation | date: 'dd/MM/yyyy' }}</td>
                 <td class="px-6 py-4">{{ pv.Quantite }} kg</td>

@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Admin } from '../model/admin';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -60,4 +59,12 @@ export class AdminServiceService {
   CreateNewAdmin(admin: Admin) {
     return this.http.post<any>(`${this.adminURL}/CreateAdmin`, admin);
   }
+
+CreateUser(user: any) {
+  return this.http.post<any>(`${this.adminURL}/CreateUser`, user);
+}
+updateAdminProfile(adminId: string, data: { email?: string; password?: string }) {
+  return this.http.put<any>(`${this.adminURL}/update/${adminId}`, data);
+}
+
 }

@@ -6,8 +6,8 @@
     <div class="flex-1 p-8">
       <!-- Header -->
       <div class="mb-8 text-center">
-        <h1 class="text-4xl font-extrabold text-gray-900">Admin Dashboard</h1>
-        <p class="text-gray-500 mt-2">Manage your platform efficiently.</p>
+        <h1 class="text-4xl font-extrabold text-gray-900">Paramètres Administrateur</h1>
+        <p class="text-gray-500 mt-2">Gérez les administrateurs et utilisateurs de la plateforme.</p>
       </div>
 
       <!-- Cards Section -->
@@ -18,9 +18,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            <h2 class="text-2xl font-semibold">Create Admin</h2>
+            <h2 class="text-2xl font-semibold">Créer un administrateur</h2>
           </div>
-          <p class="text-gray-200 mb-6">Add a new admin to the platform.</p>
+          <p class="text-gray-200 mb-6">Ajoutez un nouvel administrateur à la plateforme.</p>
           <button
             type="button"
             class="inline-flex items-center rounded bg-white px-4 py-2 text-sm font-medium text-blue-700 shadow-md transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
@@ -29,7 +29,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            Create Admin
+            Créer un administrateur
           </button>
         </div>
 
@@ -39,9 +39,9 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 mr-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            <h2 class="text-2xl font-semibold">Create User</h2>
+            <h2 class="text-2xl font-semibold">Créer un utilisateur</h2>
           </div>
-          <p class="text-gray-200 mb-6">Add a new user to the platform.</p>
+          <p class="text-gray-200 mb-6">Ajoutez un nouvel utilisateur à la plateforme.</p>
           <button
             type="button"
             class="inline-flex items-center rounded bg-white px-4 py-2 text-sm font-medium text-green-700 shadow-md transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
@@ -50,7 +50,7 @@
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m8-8H4" />
             </svg>
-            Create User
+            Créer un utilisateur
           </button>
         </div>
       </div>
@@ -59,7 +59,7 @@
       <!-- Create Admin Modal -->
       <div *ngIf="isCreateAdminModalOpen" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
         <div class="bg-white p-8 rounded-lg shadow-lg w-96">
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">Create Admin</h3>
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Créer un administrateur</h3>
           <form (ngSubmit)="createAdmin()">
             <!-- Email Input -->
             <div class="mb-4">
@@ -76,7 +76,7 @@
 
             <!-- Password Input -->
             <div class="mb-4">
-              <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+              <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
               <input
                 type="password"
                 id="password"
@@ -89,7 +89,7 @@
 
             <!-- Confirm Password Input -->
             <div class="mb-4">
-              <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirm Password</label>
+              <label for="confirmPassword" class="block text-sm font-medium text-gray-700">Confirmer le mot de passe</label>
               <input
                 type="password"
                 id="confirmPassword"
@@ -107,13 +107,13 @@
                 class="inline-flex items-center rounded bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-md transition duration-150 ease-in-out hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
                 (click)="closeCreateAdminModal()"
               >
-                Cancel
+                Annuler
               </button>
               <button
                 type="submit"
                 class="inline-flex items-center rounded bg-blue-500 px-4 py-2 text-sm font-medium text-white shadow-md transition duration-150 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2"
               >
-                Create Admin
+                Créer un administrateur
               </button>
             </div>
           </form>
@@ -123,11 +123,11 @@
       <!-- Create User Modal -->
       <div *ngIf="isCreateUserModalOpen" class="fixed inset-0 bg-gray-900 bg-opacity-75 flex items-center justify-center">
         <div class="bg-white p-8 rounded-lg shadow-lg w-96">
-          <h3 class="text-xl font-semibold text-gray-800 mb-4">Create User</h3>
-          <form (ngSubmit)="createUser()">
+          <h3 class="text-xl font-semibold text-gray-800 mb-4">Créer un utilisateur</h3>
+          <form (ngSubmit)="CreateUser()">
             <!-- Name Input -->
             <div class="mb-4">
-              <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+              <label for="name" class="block text-sm font-medium text-gray-700">Nom</label>
               <input
                 type="text"
                 id="name"
@@ -137,6 +137,18 @@
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-lg px-4 py-3"
               />
             </div>
+            <div class="mb-4">
+              <label for="firstName" class="block text-sm font-medium text-gray-700">Prénom</label>
+              <input
+                type="text"
+                id="firstName"
+                [(ngModel)]="user.firstName"
+                name="firstName"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-lg px-4 py-3"
+              />
+            </div>
+
 
             <!-- Email Input -->
             <div class="mb-4">
@@ -150,10 +162,23 @@
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-lg px-4 py-3"
               />
             </div>
+            <!-- Service Input -->
+            <div class="mb-4">
+              <label for="service" class="block text-sm font-medium text-gray-700">Service</label>
+              <input
+                type="text"
+                id="service"
+                [(ngModel)]="user.service"
+                name="service"
+                required
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-lg px-4 py-3"
+                placeholder="Saisir le service"
+              />
+            </div>
 
             <!-- Password Input -->
             <div class="mb-4">
-              <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+              <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
               <input
                 type="password"
                 id="password"
@@ -166,7 +191,7 @@
 
             <!-- Role Dropdown -->
             <div class="mb-4">
-              <label for="role" class="block text-sm font-medium text-gray-700">Role</label>
+              <label for="role" class="block text-sm font-medium text-gray-700">Rôle</label>
               <select
                 id="role"
                 [(ngModel)]="user.role"
@@ -174,10 +199,10 @@
                 required
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-green-500 focus:ring-green-500 text-lg px-4 py-3"
               >
-                <option value="" disabled selected>Select a role</option>
-                <option value="Emetteur">Emetteur</option>
-                <option value="AQ">AQ</option>
-                <option value="HSE">HSE</option>
+                <option value="" disabled selected>Choisir un rôle</option>
+                <option value="67ccb08e66312e8af97a1f3a">Émetteur</option>
+                <option value="67ccb0a866312e8af97a1f3e">AQ</option>
+                <option value="67ccb0ae66312e8af97a1f41">HSE</option>
               </select>
             </div>
 
@@ -188,13 +213,13 @@
                 class="inline-flex items-center rounded bg-red-500 px-4 py-2 text-sm font-medium text-white shadow-md transition duration-150 ease-in-out hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400 focus:ring-offset-2"
                 (click)="closeCreateUserModal()"
               >
-                Cancel
+                Annuler
               </button>
               <button
                 type="submit"
                 class="inline-flex items-center rounded bg-green-500 px-4 py-2 text-sm font-medium text-white shadow-md transition duration-150 ease-in-out hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
               >
-                Create User
+                Créer un utilisateur
               </button>
             </div>
           </form>

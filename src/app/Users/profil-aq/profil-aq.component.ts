@@ -1,14 +1,17 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { SideAqComponent } from 'src/app/aq/side-aq/side-aq.component';
 import { AuthService } from 'src/app/Service/auth.service';
 
 @Component({
-  selector: 'app-profil-emetteur',
-  templateUrl: './profil-emetteur.component.html',
-  styleUrls: ['./profil-emetteur.component.scss']
+  selector: 'app-profil-aq',
+  templateUrl: './profil-aq.component.html',
+  styleUrls: ['./profil-aq.component.scss'],
+  // Import CommonModule here
 })
-export class ProfilEmetteurComponent implements OnInit {
+export class ProfilAqComponent implements OnInit {
   profileForm!: FormGroup;
   userId!: string;
 
@@ -21,7 +24,6 @@ export class ProfilEmetteurComponent implements OnInit {
   ngOnInit(): void {
     const userData = this.authService.getUser();
     if (!userData || !userData.user) {
-      // Optionally redirect or show an error
       this.toast.error('Utilisateur non trouvé. Veuillez vous reconnecter.', 'Erreur');
       return;
     }

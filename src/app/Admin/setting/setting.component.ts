@@ -4,6 +4,7 @@ import { AdminServiceService } from 'src/app/Service/admin-service.service';
 import { Admin } from 'src/app/model/admin';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder } from '@angular/forms';
+import { role } from 'src/app/model/role';
 
 @Component({
   selector: 'app-setting',
@@ -23,9 +24,11 @@ export class SettingComponent {
   confirmPassword : string = '';
   user = {
     name: '',
+    firstName: '',
     email: '',
     password: '',
-    role: ''
+    role: '',
+    service: ''
   };
   // Open Create Admin Modal
   openCreateAdminModal(): void {
@@ -66,18 +69,40 @@ export class SettingComponent {
     );
   }
 }
-  createUser() {
-    console.log('User created:', this.user);
-    // Add your logic to send the user data to the backend here
-    this.closeCreateUserModal();
-  }
+CreateUser() {
+  // Example: you should collect firstName and roleId from your form or UI
+  const userPayload = {
+    name: this.user.name,
+    firstName: this.user.firstName, // Make sure you have this field in your form
+    email: this.user.email,
+    password: this.user.password,
+    roleId: this.user.role,
+    service: this.user.service
+     // Assuming role contains the roleId
+  };
 
+  this.AdminService.CreateUser(userPayload).subscribe({
+    next: (response) => {
+      this.toastr.success('User added successfully');
+      this.closeCreateUserModal();
+      this.resetUserForm();
+    },
+    error: (error) => {
+      this.toastr.error(error.error?.message || 'Error creating user');
+      console.error('Error creating user:', error);
+    }
+  });
+}
   resetUserForm() {
     this.user = {
       name: '',
+      firstName: '',
       email: '',
       password: '',
-      role: ''
+      role: '',
+      service: ''
     };
   }
-}
+  }
+  
+

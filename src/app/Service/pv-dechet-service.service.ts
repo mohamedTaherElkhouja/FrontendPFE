@@ -59,6 +59,15 @@ export class PvDechetServiceService {
   validatePvByHSE(pvDechetId: string, data: any): Observable<any> {
     return this.http.put<any>(`${this.apiURL}/validatePvByHSE/${pvDechetId}`, data);
   }
+
+ 
+
+
+  downloadDechetPdf(pvDechetId: string): Observable<Blob> {
+    return this.http.get(`${this.apiURL}/generateDechetPdf/${pvDechetId}`, {
+      responseType: 'blob'
+    });
+  }
 }
 
 

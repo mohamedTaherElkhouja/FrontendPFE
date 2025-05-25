@@ -16,22 +16,24 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from './layouts/navbar/navbar.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
-import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
-import { LoginAdminComponent } from './Admin/login-admin/login-admin.component';
-import { NavAdminComponent } from './Admin/nav-admin/nav-admin.component';
-import { SideAdminComponent } from './Admin/side-admin/side-admin.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
+import { NavAdminComponent } from './admin/nav-admin/nav-admin.component';
+import { SideAdminComponent } from './admin/side-admin/side-admin.component';
 import { UsersPerviewComponent } from './users-perview/users-perview.component';
-import { SearchPipe } from './Admin/Search/search.pipe';
+import { SearchPipe } from './admin/Search/search.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { PVDechetAdminComponent } from './Admin/pvdechet-admin/pvdechet-admin.component';
-import { ProfileAdminComponent } from './Admin/profile-admin/profile-admin.component';
-import { SettingComponent } from './Admin/setting/setting.component';
+import { PVDechetAdminComponent } from './admin/pvdechet-admin/pvdechet-admin.component';
+import {ProfileAdminComponent} from './admin/profile-admin/profile-admin.component';
+import { SettingComponent } from './admin/setting/setting.component';
 import { AQComponent } from './aq/aq.component';
 import { AqValidesComponent } from './aq/aq-valides/aq-valides.component';
 import { SideAqComponent } from './aq/side-aq/side-aq.component';
 import { SideHseComponent } from './hse/side-hse/side-hse.component';
 import { HseValidesComponent } from './hse/hse-valides/hse-valides.component';
 import { ProfilEmetteurComponent } from './Users/profil-emetteur/profil-emetteur.component';
+import { ProfilAqComponent } from './Users/profil-aq/profil-aq.component';
+import { ProfilHseComponent } from './Users/profil-hse/profil-hse.component';
 
 
 @NgModule({
@@ -54,7 +56,9 @@ import { ProfilEmetteurComponent } from './Users/profil-emetteur/profil-emetteur
     ProfileAdminComponent,
     SettingComponent,
     HseValidesComponent,
-    ProfilEmetteurComponent
+    ProfilEmetteurComponent,
+    ProfilAqComponent,
+    ProfilHseComponent
     
     
     

@@ -13,23 +13,31 @@ export class PVDechetAdminComponent implements OnInit {
   Page: number = 1; // Current page
   pageSize: number = 3; // Number of items per page
   pageSized = [3, 6, 9]; // Options for items per page
-  szearchTerm: string = ''; // Search term for filtering
-  filteredPvDechet: pvDechet[] = []; // Filtered list of PV records
-  filterBy: string = ''; // Filter criteria (currently unused)
+  filterBy: string = 'emetteur'; // Filter criteria
+  searchTerm: string = ''; // Search term for filtering
+  filteredPvDechet: any[] = []; // Filtered list of PV records
+  aqRoleId = '67ccb0a866312e8af97a1f3e';
+  hseRoleId = '67ccb0ae66312e8af97a1f41';
+  users: any[] = [];
+  aqUser: any = null;
+  hseUser: any = null;
 
   constructor(private adminService: AdminServiceService) {}
 
   ngOnInit() {
     this.getAllPV();
     this.countAllPV();
+    this.getAllUsers();
   }
 
   // Fetch all PV records
   getAllPV() {
     this.adminService.getALlPVHistory().subscribe(
       (response) => {
-        this.PvDechet = response;
-        console.log('PV Dechet:', this.PvDechet);
+        this.PvDechet = response.pvList || response; // adapt if you use {pvList, aqUser, hseUser}
+        this.aqUser = response.aqUser;
+        this.hseUser = response.hseUser;
+        this.applyFilter();
       },
       (error) => {
         console.error('Error fetching all PV:', error);
@@ -48,6 +56,49 @@ export class PVDechetAdminComponent implements OnInit {
         console.error('Error fetching PV count:', error);
       }
     );
+  }
+
+  // Fetch all users
+  getAllUsers() {
+    this.adminService.getAllUsers().subscribe(
+      (users) => {
+        this.users = users;
+      },
+      (error) => {
+        console.error('Error fetching users:', error);
+      }
+    );
+  }
+
+  // Apply filters
+  applyFilter() {
+    const term = this.searchTerm.trim().toLowerCase();
+    if (!term) {
+      this.filteredPvDechet = this.PvDechet;
+      return;
+    }
+    this.filteredPvDechet = this.PvDechet.filter(pv => {
+      switch (this.filterBy) {
+        case 'emetteur':
+          return (
+            (pv.Id_User?.firstName + ' ' + pv.Id_User?.name).toLowerCase().includes(term)
+          );
+        case 'aq':
+          return (
+            (pv.AQ_UserId?.firstName + ' ' + pv.AQ_UserId?.name).toLowerCase().includes(term)
+          );
+        case 'hse':
+          return (
+            (pv.HSE_UserId?.firstName + ' ' + pv.HSE_UserId?.name).toLowerCase().includes(term)
+          );
+        case 'nature':
+          return (pv.Nature_Dechet?.type_Categorie || '').toLowerCase().includes(term);
+        case 'designation':
+          return (pv.Designation || '').toLowerCase().includes(term);
+        default:
+          return true;
+      }
+    });
   }
 
   // Handle page change for pagination

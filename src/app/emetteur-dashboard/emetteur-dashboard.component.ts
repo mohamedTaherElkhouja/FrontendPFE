@@ -34,8 +34,16 @@ export class EmetteurDashboardComponent implements OnInit {
   searchStatus: string = '';
 
   ngOnInit(): void {
-    this.id = this.auth.getUser().user._id;
-    this.userName = this.auth.getUser().user.nom;
+    const userData = this.auth.getUser();
+    if (!userData || !userData.user) {
+      // Optionally redirect or show an error
+      // For example:
+      // this.toast.error('Utilisateur non trouvé. Veuillez vous reconnecter.', 'Erreur');
+      // this.router.navigate(['/login']);
+      return;
+    }
+    this.id = userData.user._id;
+    this.userName = userData.user.nom;
     this.getAllPV(this.id);
     this.getAllCategorie();
   }

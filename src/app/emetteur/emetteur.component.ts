@@ -7,7 +7,7 @@ import { pvDechet } from '../model/pvDechet';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CategorieService } from '../Service/categorie.service';
 import { Categorie } from '../model/categorie';
-
+import { user } from '../model/user';
 
 @Component({
   selector: 'app-emetteur',
@@ -24,6 +24,7 @@ export class EmetteurComponent implements OnInit{
 
   }
   createForm() {
+    const userService = this.user?.service || '';
     this.pvDechetForm = this.fb.group({
       _id: [''], // Not required when creating
       Date_Creation: ['', Validators.required],

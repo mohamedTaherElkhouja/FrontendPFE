@@ -6,6 +6,7 @@ export class user{
     email!:String
     password!:String
     role!:role
+    service!:String
 
 
 }

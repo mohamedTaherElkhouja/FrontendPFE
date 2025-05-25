@@ -18,6 +18,7 @@
               <th class="px-6 py-3">Commentaire AQ</th>
               <th class="px-6 py-3">Commentaire HSE</th>
               <th class="px-6 py-3">Statut</th>
+              <th class="px-6 py-3">PDF</th> <!-- New column for the button -->
             </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-100">
@@ -37,6 +38,11 @@
                     }">
                     {{ pv.HSE_Validated ? 'Validé' : 'Non validé' }}
                   </span>
+                </td>
+                <td class="px-6 py-4">
+                  <button (click)="downloadPdf(pv)" class="btn btn-primary">
+                    Télécharger le PDF
+                  </button>
                 </td>
               </tr>
           </tbody>

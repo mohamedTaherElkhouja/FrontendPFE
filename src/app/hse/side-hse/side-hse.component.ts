@@ -12,10 +12,10 @@ import { Router, RouterModule } from '@angular/router';
 export class SideHseComponent {
   currentRole: string | null = 'HSE'; // Example role
     HSEMenu = [
-      { label: 'Dashboard HSE', link: '/user/HSE', icon: 'fas fa-tachometer-alt' },
-      { label: 'PV validés', link: '/hse/valides', icon: 'fas fa-clipboard-check' },
-      { label: 'Profil HSE', link: '/hse/profile', icon: 'fas fa-user-shield' },
-      { label: 'Paramètres HSE', link: '/hse/settings', icon: 'fas fa-cogs' }
+      { label: 'Tableau de bord HSE', link: '/user/HSE', icon: 'fas fa-tachometer-alt' ,active : false},
+      { label: 'PV validés', link: '/hse/valides', icon: 'fas fa-clipboard-check',active : false },
+      { label: 'Profil HSE', link: '/hse/profile', icon: 'fas fa-user-shield',active : false },
+      { label: 'Paramètres HSE', link: '/hse/settings', icon: 'fas fa-cogs', active : false}
     ];
   
     constructor(private router: Router) {}

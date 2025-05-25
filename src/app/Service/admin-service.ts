@@ -22,20 +22,23 @@ public save_admin(admin:any){
   window.sessionStorage.setItem(adminKey,JSON.stringify(admin))
 }
 
-public getAdmin():any{
-  const admin=window.sessionStorage.getItem(adminKey)
-  if(admin){
-    return JSON.parse(admin)
-
+public getAdmin(): any {
+  const admin = window.sessionStorage.getItem('adminKey'); // use your actual key
+  if (admin) {
+    return JSON.parse(admin);
   }
-  return{}
+  return {};
 }
+
 public getAllUsers():Observable<any>{
     return this.http.get("/getAllUsers")
     
     
 }
 
+public updateAdminProfile(adminId: string, body: { email?: string; password?: string }): Observable<any> {
+  return this.http.put(`http://localhost:3000/admin/update/${adminId}`, body);
+}
 
 
 

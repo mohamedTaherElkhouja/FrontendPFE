@@ -31,4 +31,18 @@ export class HseValidesComponent implements OnInit {
       }
     });
   }
+  // Download PDF for a selected PV
+  downloadPdf(selectedPv: pvDechet): void {
+    this.pvService.downloadDechetPdf(String(selectedPv._id)).subscribe(blob => {
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `dechet_${selectedPv.Designation || selectedPv._id}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+    });
+  }
 }
+
