@@ -16,8 +16,6 @@ export class PVDechetAdminComponent implements OnInit {
   filterBy: string = 'emetteur'; // Filter criteria
   searchTerm: string = ''; // Search term for filtering
   filteredPvDechet: any[] = []; // Filtered list of PV records
-  aqRoleId = '67ccb0a866312e8af97a1f3e';
-  hseRoleId = '67ccb0ae66312e8af97a1f41';
   users: any[] = [];
   aqUser: any = null;
   hseUser: any = null;
@@ -35,9 +33,8 @@ export class PVDechetAdminComponent implements OnInit {
     this.adminService.getALlPVHistory().subscribe(
       (response) => {
         this.PvDechet = response.pvList || response; // adapt if you use {pvList, aqUser, hseUser}
-        this.aqUser = response.aqUser;
-        this.hseUser = response.hseUser;
-        this.applyFilter();
+     
+        console.log('All PV:', this.PvDechet);
       },
       (error) => {
         console.error('Error fetching all PV:', error);

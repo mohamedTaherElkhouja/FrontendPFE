@@ -9,17 +9,17 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { DashboardLayoutComponent } from './layouts/dashboard-layout/dashboard-layout.component';
 import { DashboardComponent } from './emetteur/dashboard/dashboard.component';
 import { EmetteurDashboardComponent } from './emetteur-dashboard/emetteur-dashboard.component';
-import { LoginAdminComponent } from './admin/login-admin/login-admin.component';
-import { AdminDashboardComponent } from './admin/admin-dashboard//admin-dashboard.component';
+import { LoginAdminComponent } from './Admin/login-admin/login-admin.component';
+import { AdminDashboardComponent } from './Admin/admin-dashboard//admin-dashboard.component';
 import { UsersPerviewComponent } from './users-perview/users-perview.component';
-import { PVDechetAdminComponent } from './admin/pvdechet-admin/pvdechet-admin.component';
-import { SettingComponent } from './admin/setting/setting.component';
+import { PVDechetAdminComponent } from './Admin/pvdechet-admin/pvdechet-admin.component';
+import { SettingComponent } from './Admin/setting/setting.component';
 import { AqValidesComponent } from './aq/aq-valides/aq-valides.component';
 import { HseValidesComponent } from './hse/hse-valides/hse-valides.component';
 import { ProfilEmetteurComponent } from './Users/profil-emetteur/profil-emetteur.component';
 import { ProfilAqComponent } from './Users/profil-aq/profil-aq.component';
 import { ProfilHseComponent } from './Users/profil-hse/profil-hse.component';
-import { ProfileAdminComponent } from './admin/profile-admin/profile-admin.component';
+import { ProfileAdminComponent } from './Admin/profile-admin/profile-admin.component';
 const routes: Routes = [
   { path: '', redirectTo: "user/login", pathMatch: 'full' },
 
