@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { PvDechetServiceService } from '../Service/pv-dechet-service.service';
 import { pvDechet } from '../model/pvDechet';
+import { AuthService } from '../Service/auth.service';
 
 @Component({
   selector: 'app-aq',
@@ -23,15 +24,18 @@ export class AQComponent implements OnInit {
 
   selectedPvForAQ: pvDechet | null = null;
   aqUserId: string = '';
+  AQ_id : string = '';
+  // Assuming you have a method to get the current user's ID""
+  user = []
 
-  constructor(private pvService: PvDechetServiceService, private http: HttpClient) {}
+  constructor(private pvService: PvDechetServiceService, private http: HttpClient , private authService : AuthService) {}
  
 
   ngOnInit(): void {
     // Example: get user from AuthService/sessionStorage
     const user = JSON.parse(sessionStorage.getItem('user_key') || '{}');
-     // Adjust key/field as needed
-     console.log('Rôle utilisateur:', user.role);
+    console.log('Rôle utilisateur:', user.role);
+    this.AQ_id = this.authService.getUser()._id; // <-- FIXED
     this.loadPVs();
   }
 
@@ -77,8 +81,8 @@ export class AQComponent implements OnInit {
       AQ_Commentaire: AQ_Commentaire || '',
       AQ_Quantite_Avant: AQ_Quantite_Avant || 0,
       AQ_Quantite_Apres: AQ_Quantite_Apres || 0,
-      
-      statut: 'valider'
+      statut: 'valider',
+      AQ_User  : this.AQ_id// Assuming you have a method to get the current user's ID
     }).subscribe({
       next: () => {
         console.log('PV validé avec succès et statut mis à jour.');
