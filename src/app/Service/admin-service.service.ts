@@ -6,14 +6,14 @@ import { Admin } from '../model/admin';
 })
 
 export class AdminServiceService {
-  private AuthURL = 'http://localhost:3000/adminAuth';
+  private AuthURL = 'http://localhost:3000/auth/admin';
   private adminURL = 'http://localhost:3000/admin';
   private adminkey = 'key_admin';
   constructor(private http: HttpClient ) {}
 
 //login 
   login(email: string, password: string) {
-    return this.http.post<any>(`${this.AuthURL}/Login`, { email, password });
+    return this.http.post<any>(`${this.AuthURL}/login`, { email, password });
   }
 //Save admin
   saveAdmin(admin: any) {

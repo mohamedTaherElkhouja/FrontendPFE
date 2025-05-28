@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { json } from 'body-parser';
-const adminAPI="http://localhost:3000/admin/"
+const adminAPI="http://localhost:3000/auth/admin/"
 const adminKey="admin_key"
 
 @Injectable({
@@ -12,9 +12,8 @@ const adminKey="admin_key"
   export class AdminService {
     constructor(private http:HttpClient) { }
 
-  loginadmin
-  (email:String,password:String):Observable<any>{
-    return this.http.post(adminAPI+"Login",{email,password})
+  loginadmin(email:String,password:String):Observable<any>{
+    return this.http.post(adminAPI+"login",{email,password})
   
 }
 public save_admin(admin:any){
