@@ -12,9 +12,8 @@ const adminKey="admin_key"
   export class AdminService {
     constructor(private http:HttpClient) { }
 
-  loginadmin
-  (email:String,password:String):Observable<any>{
-    return this.http.post(adminAPI+"Login",{email,password})
+  loginadmin(email:String,password:String):Observable<any>{
+    return this.http.post(adminAPI+"login",{email,password})
   
 }
 public save_admin(admin:any){

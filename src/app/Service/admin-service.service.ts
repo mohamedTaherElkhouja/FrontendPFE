@@ -13,7 +13,7 @@ export class AdminServiceService {
 
 //login 
   login(email: string, password: string) {
-    return this.http.post<any>(`${this.AuthURL}/Login`, { email, password });
+    return this.http.post<any>(`${this.AuthURL}/login`, { email, password });
   }
 //Save admin
   saveAdmin(admin: any) {
