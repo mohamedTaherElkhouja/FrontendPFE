@@ -12,6 +12,7 @@ export class UsersPerviewComponent {
     filteredUsers: any[] = []; // Filtered users for display
     searchTerm: string = ''; // Search term for filtering
     selectedRole: string = ''; // Selected role for filtering
+    selectedService: string = '';
     itemsPerPage: number = 3; // Default items per page
     Page: number = 1; // Current page
     pageSize: number = 3; // Number of items per page
@@ -48,12 +49,14 @@ export class UsersPerviewComponent {
     }
 
     applyFilters(): void {
+      const term = this.searchTerm.trim().toLowerCase();
       this.filteredUsers = this.users.filter((user) => {
         const matchesRole = this.selectedRole ? user.roleId?.nameRole === this.selectedRole : true;
-        const matchesSearch = this.searchTerm
-          ? user.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            user.email.toLowerCase().includes(this.searchTerm.toLowerCase())
-          : true;
+        const matchesSearch =
+          !term ||
+          (user.name && user.name.toLowerCase().includes(term)) ||
+          (user.email && user.email.toLowerCase().includes(term))  ||
+          (user.service && user.service.toLowerCase().includes(term));
         return matchesRole && matchesSearch;
       });
     }

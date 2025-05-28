@@ -17,8 +17,9 @@ export class PVDechetAdminComponent implements OnInit {
   searchTerm: string = ''; // Search term for filtering
   filteredPvDechet: any[] = []; // Filtered list of PV records
   users: any[] = [];
-  aqUser: any = null;
-  hseUser: any = null;
+  aqUser: any = null;      // <-- doit être un objet, pas un tableau
+  hseUser: any = null;     // <-- doit être un objet, pas un tableau
+  loading: boolean = false;
 
   constructor(private adminService: AdminServiceService) {}
 
@@ -32,9 +33,16 @@ export class PVDechetAdminComponent implements OnInit {
   getAllPV() {
     this.adminService.getALlPVHistory().subscribe(
       (response) => {
-        this.PvDechet = response.pvList || response; // adapt if you use {pvList, aqUser, hseUser}
-     
-        console.log('All PV:', this.PvDechet);
+        this.PvDechet = response.pvList;
+        this.aqUser = response.aqUser || null;
+        this.hseUser = response.hseUser || null;
+        // Ajoute les noms AQ/HSE à chaque PV si validé
+        this.PvDechet.forEach(pv => {
+          pv.AQ_Name = pv.AQ_Validated ? (this.aqUser ? `${this.aqUser.firstName} ${this.aqUser.name}` : 'Non validé') : 'Non validé';
+          pv.HSE_Name = pv.HSE_Validated ? (this.hseUser ? `${this.hseUser.firstName} ${this.hseUser.name}` : 'Non validé') : 'Non validé';
+        });
+        this.filteredPvDechet = [...this.PvDechet];
+        this.loading = false;
       },
       (error) => {
         console.error('Error fetching all PV:', error);
@@ -78,15 +86,15 @@ export class PVDechetAdminComponent implements OnInit {
       switch (this.filterBy) {
         case 'emetteur':
           return (
-            (pv.Id_User?.firstName + ' ' + pv.Id_User?.name).toLowerCase().includes(term)
+            (pv.Id_User?.firstName + ' ' + pv.Id_User?.firstName).toLowerCase().includes(term)
           );
-        case 'aq':
+        case 'AQ':
           return (
-            (pv.AQ_UserId?.firstName + ' ' + pv.AQ_UserId?.name).toLowerCase().includes(term)
+            pv.AQ_Name?.toLowerCase().includes(term)
           );
-        case 'hse':
+        case 'HSE':
           return (
-            (pv.HSE_UserId?.firstName + ' ' + pv.HSE_UserId?.name).toLowerCase().includes(term)
+             pv.HSE_Name?.toLowerCase().includes(term)
           );
         case 'nature':
           return (pv.Nature_Dechet?.type_Categorie || '').toLowerCase().includes(term);

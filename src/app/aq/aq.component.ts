@@ -81,8 +81,8 @@ export class AQComponent implements OnInit {
       AQ_Commentaire: AQ_Commentaire || '',
       AQ_Quantite_Avant: AQ_Quantite_Avant || 0,
       AQ_Quantite_Apres: AQ_Quantite_Apres || 0,
-      statut: 'valider',
-      AQ_User  : this.AQ_id// Assuming you have a method to get the current user's ID
+      statut: 'valider'
+      // Do NOT send AQ_User or userId
     }).subscribe({
       next: () => {
         console.log('PV validé avec succès et statut mis à jour.');
@@ -93,7 +93,7 @@ export class AQComponent implements OnInit {
         console.error('Erreur lors de la validation du PV :', error);
       }
     });
-  }
+}
   showOnlyValidatedPv(): void {
     this.filteredPvDechet = this.allPvDechets.filter(pv => pv.AQ_Validated);
   }

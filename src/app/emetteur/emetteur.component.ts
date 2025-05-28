@@ -24,27 +24,23 @@ export class EmetteurComponent implements OnInit{
 
   }
   createForm() {
-    const userService = this.user?.service || '';
     this.pvDechetForm = this.fb.group({
-      _id: [''], // Not required when creating
-      Date_Creation: ['', Validators.required],
-      Id_User: ['', Validators.required],
-      Nature_Dechet: ['', Validators.required],
-      Type_Dechet: ['', Validators.required],
-      Service_Emetteur:['',Validators.required],
-      Designation: ['', [Validators.required, Validators.minLength(3)]],
-      Num_lot: ['', [Validators.required, Validators.min(1), Validators.max(5)]],
-      Quantite: ['', Validators.required],
-      Motif_Rejet: ['', Validators.required],
+      Date_Creation: [''],
+      Nature_Dechet: [''],
+      Service_Emetteur: [this.user.service || '', Validators.required],
+      Type_Dechet: [''],
+      Designation: [''],
+      Quantite: [''],
+      Num_lot: [''],
+      Motif_Rejet: [''],
       Commentaire: ['']
     });
   }
   ngOnInit(): void {
-    this.user=this.auth.getUser().user
+    this.user = this.auth.getUser().user; // user doit contenir .service
     this.createForm();
-    this.getAllCategorie()
-    this.id=this.auth.getUser().user._id
-
+    this.getAllCategorie();
+    this.id = this.user._id;
   }
   getAllCategorie(){
     this.CategorieService.getAllCategories(this.categorie).subscribe(
@@ -59,7 +55,7 @@ export class EmetteurComponent implements OnInit{
     )
   }
   submitAddPvDechet() { 
-    const formData: pvDechet = this.pvDechetForm.value;
+    const formData: pvDechet = this.pvDechetForm.getRawValue(); // <-- ici !
     formData.Id_User = this.user._id; 
     console.log("Form Data Sent:", formData); // Debugging
   
@@ -77,7 +73,7 @@ export class EmetteurComponent implements OnInit{
     });
   }
   submitSavePvDechet(){
-    const formData: pvDechet = this.pvDechetForm.value;
+    const formData: pvDechet = this.pvDechetForm.getRawValue(); // <-- ici aussi !
     formData.Id_User = this.user._id; 
     console.log("Form Data Sent:", formData); // Debugging
   console.log(formData.Id_User)

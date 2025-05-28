@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { json } from 'body-parser';
-const adminAPI="http://localhost:3000/admin/"
+const adminAPI="http://localhost:3000/auth/admin/"
 const adminKey="admin_key"
 
 @Injectable({

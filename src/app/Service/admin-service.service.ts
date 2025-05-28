@@ -6,7 +6,7 @@ import { Admin } from '../model/admin';
 })
 
 export class AdminServiceService {
-  private AuthURL = 'http://localhost:3000/adminAuth';
+  private AuthURL = 'http://localhost:3000/auth/admin';
   private adminURL = 'http://localhost:3000/admin';
   private adminkey = 'key_admin';
   constructor(private http: HttpClient ) {}

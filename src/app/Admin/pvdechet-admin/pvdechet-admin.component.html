@@ -60,19 +60,8 @@
                   </div>
                 </td>
                 <!-- Validé par AQ -->
-                <td class="py-3 px-4">
-                  
-                    <span class="font-semibold">{{pv.AQ_Validated}}</span>
-                  
-                  
-                </td>
-                <!-- Validé par HSE -->
-                <td class="py-3 px-4">
-            
-                    <span class="font-semibold">{{pv.HSE_Validated}}</span>
-               
-                  
-                </td>
+                <td>{{ pv.AQ_Name || 'Non validé' }}</td>
+                <td>{{ pv.HSE_Name || 'Non validé' }}</td>
                 <td class="py-3 px-4">{{ pv.Nature_Dechet?.type_Categorie }}</td>
                 <td class="py-3 px-4">{{ pv.Designation }}</td>
                 <td class="py-3 px-4">{{ pv.Quantite }}</td>
